@@ -7,46 +7,44 @@ import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.Color;
 
-public class Carga extends JPanel {
+public class Campo extends JPanel {
 	private JTextField textCarga;
 	private JTextField textExponenteC;
-	private JTextField textFuerza;
-	private JTextField textExponenteF;
 	private JTextField textDistancia;
 	private JTextField textExponenteD;
-	private JTextField textCargaR;
+	private JTextField textCampo;
+	private JLabel lblM_1_2;
+	private JLabel lblM_1_1;
 	private JButton btnRegresar;
 	private JLabel lblDatos;
 	private JLabel lblM_1;
-	private JLabel lblCargaResultante;
+	private JLabel lblCampo;
 	private JButton btnResultado;
-	private JLabel lblX10_2;
+	private JLabel lblX10D;
 	private JLabel lblM;
 	private JLabel lblDistancia;
-	private JLabel lblFuerza;
-	private JLabel lblUniC_1;
-	private JLabel lblX10_1;
-	private JLabel lblX10;
+	private JLabel lblX10C;
 	private JLabel lblUniC;
 	private JLabel lblCarga1;
 	private JCheckBox chckbxDistancia;
-	private JCheckBox chckbxFuerza;
 	private JCheckBox chckbxCarga1;
 	private JLabel lblNotacion;
-	private JLabel lblCarga;
+	private JLabel lblCampoElectrico;
 
 	/**
 	 * Create the panel.
 	 */
-	public Carga() {
+	public Campo() {
 		setLayout(null);
 		
-		lblCarga = new JLabel("CARGA");
-		lblCarga.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCarga.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 36));
-		lblCarga.setBounds(31, 11, 444, 50);
-		add(lblCarga);
+		lblCampoElectrico = new JLabel("CAMPO ELECTRICO");
+		lblCampoElectrico.setBackground(new Color(51, 51, 51));
+		lblCampoElectrico.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCampoElectrico.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 36));
+		lblCampoElectrico.setBounds(31, 11, 444, 50);
+		add(lblCampoElectrico);
 		
 		lblNotacion = new JLabel("Notaci\u00F3n Cientifica:");
 		lblNotacion.setBounds(31, 72, 97, 14);
@@ -56,12 +54,8 @@ public class Carga extends JPanel {
 		chckbxCarga1.setBounds(154, 68, 97, 23);
 		add(chckbxCarga1);
 		
-		chckbxFuerza = new JCheckBox("Fuerza");
-		chckbxFuerza.setBounds(277, 68, 97, 23);
-		add(chckbxFuerza);
-		
 		chckbxDistancia = new JCheckBox("Distancia");
-		chckbxDistancia.setBounds(402, 68, 97, 23);
+		chckbxDistancia.setBounds(277, 68, 97, 23);
 		add(chckbxDistancia);
 		
 		lblCarga1 = new JLabel("Carga =");
@@ -86,85 +80,58 @@ public class Carga extends JPanel {
 		lblUniC.setBounds(245, 146, 42, 28);
 		add(lblUniC);
 		
-		lblX10 = new JLabel("x10 E");
-		lblX10.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblX10.setBounds(277, 146, 42, 28);
-		add(lblX10);
-		
-		lblX10_1 = new JLabel("x10 E");
-		lblX10_1.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblX10_1.setBounds(277, 198, 42, 28);
-		add(lblX10_1);
-		
-		lblUniC_1 = new JLabel("N");
-		lblUniC_1.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblUniC_1.setBounds(245, 198, 42, 28);
-		add(lblUniC_1);
-		
-		lblFuerza = new JLabel("Fuerza =");
-		lblFuerza.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblFuerza.setBounds(31, 198, 60, 28);
-		add(lblFuerza);
-		
-		textFuerza = new JTextField();
-		textFuerza.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		textFuerza.setColumns(10);
-		textFuerza.setBounds(115, 198, 126, 28);
-		add(textFuerza);
-		
-		textExponenteF = new JTextField();
-		textExponenteF.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		textExponenteF.setColumns(10);
-		textExponenteF.setBounds(318, 198, 107, 28);
-		add(textExponenteF);
+		lblX10C = new JLabel("x10 E");
+		lblX10C.setFont(new Font("Cambria Math", Font.PLAIN, 15));
+		lblX10C.setBounds(277, 146, 42, 28);
+		add(lblX10C);
 		
 		lblDistancia = new JLabel("Distancia =");
 		lblDistancia.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblDistancia.setBounds(31, 250, 76, 28);
+		lblDistancia.setBounds(29, 198, 76, 28);
 		add(lblDistancia);
 		
 		textDistancia = new JTextField();
 		textDistancia.setFont(new Font("Cambria Math", Font.PLAIN, 15));
 		textDistancia.setColumns(10);
-		textDistancia.setBounds(115, 250, 126, 28);
+		textDistancia.setBounds(115, 198, 126, 28);
 		add(textDistancia);
 		
 		lblM = new JLabel("m");
 		lblM.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblM.setBounds(245, 250, 42, 28);
+		lblM.setBounds(245, 198, 42, 28);
 		add(lblM);
 		
-		lblX10_2 = new JLabel("x10 E");
-		lblX10_2.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblX10_2.setBounds(277, 250, 42, 28);
-		add(lblX10_2);
+		lblX10D = new JLabel("x10 E");
+		lblX10D.setFont(new Font("Cambria Math", Font.PLAIN, 15));
+		lblX10D.setBounds(277, 198, 42, 28);
+		add(lblX10D);
 		
 		textExponenteD = new JTextField();
 		textExponenteD.setFont(new Font("Cambria Math", Font.PLAIN, 15));
 		textExponenteD.setColumns(10);
-		textExponenteD.setBounds(318, 250, 107, 28);
+		textExponenteD.setBounds(318, 198, 107, 28);
 		add(textExponenteD);
 		
 		btnResultado = new JButton("Resultado");
 		btnResultado.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
-		btnResultado.setBounds(138, 289, 135, 40);
-		btnResultado.setActionCommand("BTN_RESULTADO_CA");
+		btnResultado.setBounds(166, 255, 135, 40);
+		btnResultado.setActionCommand("BTN_RESULTADO_C");
 		add(btnResultado);
 		
-		lblCargaResultante = new JLabel("Carga =");
-		lblCargaResultante.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblCargaResultante.setBounds(52, 346, 76, 28);
-		add(lblCargaResultante);
+		lblCampo = new JLabel("Campo =");
+		lblCampo.setFont(new Font("Cambria Math", Font.PLAIN, 15));
+		lblCampo.setBounds(52, 322, 76, 28);
+		add(lblCampo);
 		
-		textCargaR = new JTextField();
-		textCargaR.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		textCargaR.setColumns(10);
-		textCargaR.setBounds(134, 346, 153, 28);
-		add(textCargaR);
+		textCampo = new JTextField();
+		textCampo.setFont(new Font("Cambria Math", Font.PLAIN, 15));
+		textCampo.setColumns(10);
+		textCampo.setBounds(115, 322, 145, 28);
+		add(textCampo);
 		
-		lblM_1 = new JLabel("C");
+		lblM_1 = new JLabel("N");
 		lblM_1.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblM_1.setBounds(298, 346, 42, 28);
+		lblM_1.setBounds(277, 316, 42, 28);
 		add(lblM_1);
 		
 		lblDatos = new JLabel("DATOS");
@@ -174,10 +141,21 @@ public class Carga extends JPanel {
 		add(lblDatos);
 		
 		btnRegresar = new JButton("Regresar");
+		btnRegresar.setForeground(new Color(51, 51, 51));
 		btnRegresar.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
 		btnRegresar.setBounds(0, 0, 91, 23);
-		btnRegresar.setActionCommand("BTN_REGRESAR_CA");
+		btnRegresar.setActionCommand("BTN_REGRESAR_C");
 		add(btnRegresar);
+		
+		lblM_1_1 = new JLabel("C");
+		lblM_1_1.setFont(new Font("Cambria Math", Font.PLAIN, 15));
+		lblM_1_1.setBounds(277, 337, 42, 28);
+		add(lblM_1_1);
+		
+		lblM_1_2 = new JLabel("___");
+		lblM_1_2.setFont(new Font("Cambria Math", Font.PLAIN, 15));
+		lblM_1_2.setBounds(271, 322, 42, 28);
+		add(lblM_1_2);
 
 	}
 
@@ -189,14 +167,6 @@ public class Carga extends JPanel {
 		return textExponenteC;
 	}
 
-	public JTextField getTextFuerza() {
-		return textFuerza;
-	}
-
-	public JTextField getTextExponenteF() {
-		return textExponenteF;
-	}
-
 	public JTextField getTextDistancia() {
 		return textDistancia;
 	}
@@ -205,8 +175,16 @@ public class Carga extends JPanel {
 		return textExponenteD;
 	}
 
-	public JTextField getTextCargaR() {
-		return textCargaR;
+	public JTextField getTextCampo() {
+		return textCampo;
+	}
+
+	public JLabel getLblM_1_2() {
+		return lblM_1_2;
+	}
+
+	public JLabel getLblM_1_1() {
+		return lblM_1_1;
 	}
 
 	public JButton getBtnRegresar() {
@@ -221,16 +199,16 @@ public class Carga extends JPanel {
 		return lblM_1;
 	}
 
-	public JLabel getLblCargaResultante() {
-		return lblCargaResultante;
+	public JLabel getLblCampo() {
+		return lblCampo;
 	}
 
 	public JButton getBtnResultado() {
 		return btnResultado;
 	}
 
-	public JLabel getLblX10_2() {
-		return lblX10_2;
+	public JLabel getLblX10D() {
+		return lblX10D;
 	}
 
 	public JLabel getLblM() {
@@ -241,20 +219,8 @@ public class Carga extends JPanel {
 		return lblDistancia;
 	}
 
-	public JLabel getLblFuerza() {
-		return lblFuerza;
-	}
-
-	public JLabel getLblUniC_1() {
-		return lblUniC_1;
-	}
-
-	public JLabel getLblX10_1() {
-		return lblX10_1;
-	}
-
-	public JLabel getLblX10() {
-		return lblX10;
+	public JLabel getLblX10C() {
+		return lblX10C;
 	}
 
 	public JLabel getLblUniC() {
@@ -269,10 +235,6 @@ public class Carga extends JPanel {
 		return chckbxDistancia;
 	}
 
-	public JCheckBox getChckbxFuerza() {
-		return chckbxFuerza;
-	}
-
 	public JCheckBox getChckbxCarga1() {
 		return chckbxCarga1;
 	}
@@ -281,8 +243,8 @@ public class Carga extends JPanel {
 		return lblNotacion;
 	}
 
-	public JLabel getLblCarga() {
-		return lblCarga;
+	public JLabel getLblCampoElectrico() {
+		return lblCampoElectrico;
 	}
 	
 

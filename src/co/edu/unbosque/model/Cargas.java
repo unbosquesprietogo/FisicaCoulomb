@@ -2,7 +2,7 @@ package co.edu.unbosque.model;
 
 public class Cargas {
 	
-	private double carga1, carga2, fuerza, distancia;
+	private double carga1, carga2, fuerza, distancia, a, x;
 
 	public Cargas() {
 		
@@ -25,7 +25,24 @@ public class Cargas {
 		return Math.sqrt(((9*(Math.pow(10, 9)))*(carga1*(Math.pow(10, eCarga1)))*(carga2*(Math.pow(10, eCarga2))))/
 				(fuerza*(Math.pow(10, eFuerza))));
 	}
-
+	public double calcularCampo(int eCarga, int eDistancia) {
+		
+		return ((9*(Math.pow(10, 9)))*(carga1*(Math.pow(10, eCarga))))/
+				(Math.pow(distancia*(Math.pow(10, eDistancia)), 2));
+	}
+	
+	public double calcularCampoVarilla(int eCarga, int eA, int eX){
+		
+		return ((9*(Math.pow(10, 9)))*(carga1*(Math.pow(10, eCarga))))/
+				((x*(Math.pow(10, eX)))*(Math.sqrt((Math.pow(a*(Math.pow(10, eA)), 2))+(Math.pow(x*(Math.pow(10, eX)), 2)))));	
+	}
+	
+	public double calcularCampoAnillo(int eCarga, int eA, int eX) {
+		return ((9*(Math.pow(10, 9)))*(carga1*(Math.pow(10, eCarga)))*(x*(Math.pow(10, eX))))/
+				Math.pow((Math.pow(a*(Math.pow(10, eA)), 2))+(Math.pow(x*(Math.pow(10, eX)), 2)),(3/2));
+	}
+	
+	
 	public double getCarga1() {
 		return carga1;
 	}
