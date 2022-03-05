@@ -1,7 +1,6 @@
 package co.edu.unbosque.view;
 
 import javax.swing.JPanel;
-import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -10,10 +9,11 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 
 public class FuerzaElectrica extends JPanel {
+	
 	private JTextField textCarga1;
 	private JTextField textExponenteC1;
 	private JTextField textCarga2;
-	private JTextField textExponenteC;
+	private JTextField textExponenteC2;
 	private JTextField textDistancia;
 	private JTextField textExponenteD;
 	private JTextField textFuerza;
@@ -61,20 +61,26 @@ public class FuerzaElectrica extends JPanel {
 		textCarga1.setColumns(10);
 		
 		chckbxCarga1 = new JCheckBox("Carga 1");
+		chckbxCarga1.setActionCommand("CHK_C1_FE");
 		chckbxCarga1.setBounds(164, 68, 97, 23);
+		chckbxCarga1.setSelected(true);
 		add(chckbxCarga1);
+				
 		
-
 		chckbxCarga2 = new JCheckBox("Carga 2");
+		chckbxCarga2.setActionCommand("CHK_C2_FE");
 		chckbxCarga2.setBounds(287, 68, 97, 23);
+		chckbxCarga2.setSelected(true);
 		add(chckbxCarga2);
 		
 		chckbxDistancia = new JCheckBox("Distancia");
+		chckbxDistancia.setActionCommand("CHK_D_FE");
 		chckbxDistancia.setBounds(412, 68, 97, 23);
+		chckbxDistancia.setSelected(true);
 		add(chckbxDistancia);
 		
 		lblNewLabel_1 = new JLabel("Notaci\u00F3n Cientifica:");
-		lblNewLabel_1.setBounds(41, 72, 97, 14);
+		lblNewLabel_1.setBounds(32, 72, 126, 14);
 		add(lblNewLabel_1);
 		
 		lblX10C1 = new JLabel("x10 E");
@@ -120,11 +126,11 @@ public class FuerzaElectrica extends JPanel {
 		lblX10C2.setBounds(287, 198, 42, 28);
 		add(lblX10C2);
 		
-		textExponenteC = new JTextField();
-		textExponenteC.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		textExponenteC.setColumns(10);
-		textExponenteC.setBounds(328, 198, 107, 28);
-		add(textExponenteC);
+		textExponenteC2 = new JTextField();
+		textExponenteC2.setFont(new Font("Cambria Math", Font.PLAIN, 15));
+		textExponenteC2.setColumns(10);
+		textExponenteC2.setBounds(328, 198, 107, 28);
+		add(textExponenteC2);
 		
 		lblDistancia = new JLabel("Distancia =");
 		lblDistancia.setFont(new Font("Cambria Math", Font.PLAIN, 15));
@@ -167,12 +173,12 @@ public class FuerzaElectrica extends JPanel {
 		textFuerza = new JTextField();
 		textFuerza.setFont(new Font("Cambria Math", Font.PLAIN, 15));
 		textFuerza.setColumns(10);
-		textFuerza.setBounds(144, 346, 153, 28);
+		textFuerza.setBounds(125, 346, 333, 28);
 		add(textFuerza);
 		
 		lblN = new JLabel("N");
 		lblN.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblN.setBounds(305, 346, 42, 28);
+		lblN.setBounds(468, 346, 42, 28);
 		add(lblN);
 		
 		btnRegresar = new JButton("Regresar");
@@ -181,8 +187,49 @@ public class FuerzaElectrica extends JPanel {
 		btnRegresar.setActionCommand("BTN_REGRESAR_FE");
 		add(btnRegresar);
 
+		
 	}
+	
 
+	public void validarCheck(int a) {
+		if(a==1) {
+			if(chckbxCarga1.isSelected()) {
+				textExponenteC1.setText(null);
+				textExponenteC1.setVisible(true);
+				lblX10C1.setVisible(true);
+			}else {
+				textExponenteC1.setText("0");
+				textExponenteC1.setVisible(false);
+				lblX10C1.setVisible(false);
+			}
+			
+		}
+		if (a==2) {
+
+			if(chckbxCarga2.isSelected()) {
+				textExponenteC2.setText(null);
+				textExponenteC2.setVisible(true);
+				lblX10C2.setVisible(true);
+			}else {
+				textExponenteC2.setText("0");
+				textExponenteC2.setVisible(false);
+				lblX10C2.setVisible(false);
+			}
+		}
+		if (a==3) {
+
+			if(chckbxDistancia.isSelected()) {
+				textExponenteD.setText(null);
+				textExponenteD.setVisible(true);
+				lblX10D.setVisible(true);
+			}else {
+				textExponenteD.setText("0");
+				textExponenteD.setVisible(false);
+				lblX10D.setVisible(false);
+			}
+		}
+	}
+	
 	public JTextField getTextCarga1() {
 		return textCarga1;
 	}
@@ -196,7 +243,7 @@ public class FuerzaElectrica extends JPanel {
 	}
 
 	public JTextField getTextExponenteC() {
-		return textExponenteC;
+		return textExponenteC2;
 	}
 
 	public JTextField getTextDistancia() {

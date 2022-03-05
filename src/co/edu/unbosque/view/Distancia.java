@@ -12,14 +12,14 @@ public class Distancia extends JPanel {
 	private JTextField textCarga1;
 	private JTextField textExponenteC1;
 	private JTextField textCarga2;
-	private JTextField textExponeteC2;
+	private JTextField textExponenteC2;
 	private JTextField textFuerza;
 	private JTextField textExponenteF;
 	private JTextField textDistancia;
 	private JLabel lblDistancia_1;
 	private JLabel lblNotacion;
 	private JCheckBox chckbxCarga1;
-	private JCheckBox chckbxCarga;
+	private JCheckBox chckbxCarga2;
 	private JCheckBox chckbxFuerza;
 	private JLabel lblCarga1;
 	private JLabel lblUniC;
@@ -49,18 +49,24 @@ public class Distancia extends JPanel {
 		add(lblDistancia_1);
 		
 		lblNotacion = new JLabel("Notaci\u00F3n Cientifica:");
-		lblNotacion.setBounds(28, 72, 97, 14);
+		lblNotacion.setBounds(30, 72, 115, 14);
 		add(lblNotacion);
 		
-		chckbxCarga1 = new JCheckBox("Carga");
+		chckbxCarga1 = new JCheckBox("Carga 1");
+		chckbxCarga1.setActionCommand("CHK_C1_D");
+		chckbxCarga1.setSelected(true);
 		chckbxCarga1.setBounds(151, 68, 97, 23);
 		add(chckbxCarga1);
 		
-		chckbxCarga = new JCheckBox("Carga");
-		chckbxCarga.setBounds(274, 68, 97, 23);
-		add(chckbxCarga);
+		chckbxCarga2 = new JCheckBox("Carga 2");
+		chckbxCarga2.setActionCommand("CHK_C2_D");
+		chckbxCarga2.setSelected(true);
+		chckbxCarga2.setBounds(274, 68, 97, 23);
+		add(chckbxCarga2);
 		
 		chckbxFuerza = new JCheckBox("Fuerza");
+		chckbxFuerza.setActionCommand("CHK_F_D");
+		chckbxFuerza.setSelected(true);
 		chckbxFuerza.setBounds(399, 68, 97, 23);
 		add(chckbxFuerza);
 		
@@ -112,11 +118,11 @@ public class Distancia extends JPanel {
 		textCarga2.setBounds(112, 198, 126, 28);
 		add(textCarga2);
 		
-		textExponeteC2 = new JTextField();
-		textExponeteC2.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		textExponeteC2.setColumns(10);
-		textExponeteC2.setBounds(315, 198, 107, 28);
-		add(textExponeteC2);
+		textExponenteC2 = new JTextField();
+		textExponenteC2.setFont(new Font("Cambria Math", Font.PLAIN, 15));
+		textExponenteC2.setColumns(10);
+		textExponenteC2.setBounds(315, 198, 107, 28);
+		add(textExponenteC2);
 		
 		lblFuerza = new JLabel("Fuerza =");
 		lblFuerza.setFont(new Font("Cambria Math", Font.PLAIN, 15));
@@ -153,18 +159,18 @@ public class Distancia extends JPanel {
 		
 		lblDistancia = new JLabel("Distancia =");
 		lblDistancia.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblDistancia.setBounds(49, 346, 76, 28);
+		lblDistancia.setBounds(28, 346, 76, 28);
 		add(lblDistancia);
 		
 		textDistancia = new JTextField();
 		textDistancia.setFont(new Font("Cambria Math", Font.PLAIN, 15));
 		textDistancia.setColumns(10);
-		textDistancia.setBounds(131, 346, 153, 28);
+		textDistancia.setBounds(112, 346, 323, 28);
 		add(textDistancia);
 		
 		lblM_1 = new JLabel("m");
 		lblM_1.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblM_1.setBounds(294, 346, 42, 28);
+		lblM_1.setBounds(445, 346, 42, 28);
 		add(lblM_1);
 		
 		lblDatos = new JLabel("DATOS");
@@ -180,6 +186,45 @@ public class Distancia extends JPanel {
 		add(btnRegresar);
 
 	}
+	public void validarCheck(int a) {
+		if(a==1) {
+			if(chckbxCarga1.isSelected()) {
+				textExponenteC1.setText(null);
+				textExponenteC1.setVisible(true);
+				lblX10C1.setVisible(true);
+			}else {
+				textExponenteC1.setText("0");
+				textExponenteC1.setVisible(false);
+				lblX10C1.setVisible(false);
+			}
+			
+		}
+		if (a==2) {
+
+			if(chckbxCarga2.isSelected()) {
+				textExponenteC2.setText(null);
+				textExponenteC2.setVisible(true);
+				lblX10C2.setVisible(true);
+			}else {
+				textExponenteC2.setText("0");
+				textExponenteC2.setVisible(false);
+				lblX10C2.setVisible(false);
+			}
+		}
+		if (a==3) {
+
+			if(chckbxFuerza.isSelected()) {
+				textExponenteF.setText(null);
+				textExponenteF.setVisible(true);
+				lblX10F.setVisible(true);
+			}else {
+				textExponenteF.setText("0");
+				textExponenteF.setVisible(false);
+				lblX10F.setVisible(false);
+			}
+		}
+	}
+	
 
 	public JTextField getTextCarga1() {
 		return textCarga1;
@@ -193,8 +238,8 @@ public class Distancia extends JPanel {
 		return textCarga2;
 	}
 
-	public JTextField getTextExponeteC2() {
-		return textExponeteC2;
+	public JTextField getTextExponenteC2() {
+		return textExponenteC2;
 	}
 
 	public JTextField getTextFuerza() {
@@ -221,8 +266,8 @@ public class Distancia extends JPanel {
 		return chckbxCarga1;
 	}
 
-	public JCheckBox getChckbxCarga() {
-		return chckbxCarga;
+	public JCheckBox getChckbxCarga2() {
+		return chckbxCarga2;
 	}
 
 	public JCheckBox getChckbxFuerza() {

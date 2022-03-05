@@ -26,6 +26,7 @@ public class Inicio extends JPanel {
 	 */
 	public Inicio() {
 		setLayout(null);
+		setVisible(true);
 		
 		tittleLbl = new JLabel("FISICA ELECTRICA");
 		tittleLbl.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 36));
@@ -57,4 +58,30 @@ public class Inicio extends JPanel {
 		add(lblImage);	
 
 	}
+
+	public JLabel getLblImage() {
+		return lblImage;
+	}
+
+	public JLabel getLblNombres() {
+		return lblNombres;
+	}
+
+	public JButton getBtnCampo() {
+		return btnCampo;
+	}
+
+	public JButton getBtnCargas() {
+		return btnCargas;
+	}
+
+	public JLabel getTittleLbl() {
+		return tittleLbl;
+	}
+
+	public ImageIcon getImg() {
+		return img;
+	}
+	
+	
 }

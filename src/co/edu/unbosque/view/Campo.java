@@ -47,14 +47,18 @@ public class Campo extends JPanel {
 		add(lblCampoElectrico);
 		
 		lblNotacion = new JLabel("Notaci\u00F3n Cientifica:");
-		lblNotacion.setBounds(31, 72, 97, 14);
+		lblNotacion.setBounds(22, 72, 135, 14);
 		add(lblNotacion);
 		
 		chckbxCarga1 = new JCheckBox("Carga");
+		chckbxCarga1.setActionCommand("CHK_C1_CE");
+		chckbxCarga1.setSelected(true);
 		chckbxCarga1.setBounds(154, 68, 97, 23);
 		add(chckbxCarga1);
 		
 		chckbxDistancia = new JCheckBox("Distancia");
+		chckbxDistancia.setActionCommand("CHK_D_CE");
+		chckbxDistancia.setSelected(true);
 		chckbxDistancia.setBounds(277, 68, 97, 23);
 		add(chckbxDistancia);
 		
@@ -120,18 +124,18 @@ public class Campo extends JPanel {
 		
 		lblCampo = new JLabel("Campo =");
 		lblCampo.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblCampo.setBounds(52, 322, 76, 28);
+		lblCampo.setBounds(31, 322, 76, 28);
 		add(lblCampo);
 		
 		textCampo = new JTextField();
 		textCampo.setFont(new Font("Cambria Math", Font.PLAIN, 15));
 		textCampo.setColumns(10);
-		textCampo.setBounds(115, 322, 145, 28);
+		textCampo.setBounds(115, 322, 310, 28);
 		add(textCampo);
 		
 		lblM_1 = new JLabel("N");
 		lblM_1.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblM_1.setBounds(277, 316, 42, 28);
+		lblM_1.setBounds(433, 313, 42, 28);
 		add(lblM_1);
 		
 		lblDatos = new JLabel("DATOS");
@@ -149,16 +153,42 @@ public class Campo extends JPanel {
 		
 		lblM_1_1 = new JLabel("C");
 		lblM_1_1.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblM_1_1.setBounds(277, 337, 42, 28);
+		lblM_1_1.setBounds(433, 334, 42, 28);
 		add(lblM_1_1);
 		
 		lblM_1_2 = new JLabel("___");
 		lblM_1_2.setFont(new Font("Cambria Math", Font.PLAIN, 15));
-		lblM_1_2.setBounds(271, 322, 42, 28);
+		lblM_1_2.setBounds(427, 319, 42, 28);
 		add(lblM_1_2);
 
 	}
+	public void validarCheck(int a) {
+		if(a==1) {
+			if(chckbxCarga1.isSelected()) {
+				textExponenteC.setText(null);
+				textExponenteC.setVisible(true);
+				lblX10C.setVisible(true);
+			}else {
+				textExponenteC.setText("0");
+				textExponenteC.setVisible(false);
+				lblX10C.setVisible(false);
+			}
+			
+		}
 
+		if (a==2) {
+
+			if(chckbxDistancia.isSelected()) {
+				textExponenteD.setText(null);
+				textExponenteD.setVisible(true);
+				lblX10D.setVisible(true);
+			}else {
+				textExponenteD.setText("0");
+				textExponenteD.setVisible(false);
+				lblX10D.setVisible(false);
+			}
+		}
+	}
 	public JTextField getTextCarga() {
 		return textCarga;
 	}
