@@ -155,21 +155,21 @@ public class Controller implements ActionListener{
 			vista.limpiarPanel(vista.getVarilla());
 
 		}
-		if(c.equals("BTN_RESULTADO_D")) {
+		if(c.equals("BTN_RESULTADO_CA")) {
 
 			try {
-				double carga1= Double.parseDouble(vista.getDistancia().getTextCarga1().getText());
-				double carga2= Double.parseDouble(vista.getDistancia().getTextCarga2().getText());
-				double fuerza = Double.parseDouble(vista.getDistancia().getTextFuerza().getText());
-				int eCarga1= Integer.parseInt(vista.getDistancia().getTextExponenteC1().getText());
-				int eCarga2 = Integer.parseInt(vista.getDistancia().getTextExponenteC2().getText());
-				int eFuerza = Integer.parseInt(vista.getDistancia().getTextExponenteF().getText());
+				double carga1= Double.parseDouble(vista.getCarga().getTextCarga().getText());
+				double distancia= Double.parseDouble(vista.getCarga().getTextDistancia().getText());
+				double fuerza = Double.parseDouble(vista.getCarga().getTextFuerza().getText());
+				int eCarga1= Integer.parseInt(vista.getCarga().getTextExponenteC().getText());
+				int eDistancia = Integer.parseInt(vista.getCarga().getTextExponenteD().getText());
+				int eFuerza = Integer.parseInt(vista.getCarga().getTextExponenteF().getText());
 
 				carga.setCarga1(carga1);
-				carga.setCarga2(carga2);
+				carga.setDistancia(distancia);
 				carga.setFuerza(fuerza);
 
-				vista.getDistancia().getTextDistancia().setText(String.valueOf(carga.calcularDistancia(eCarga1, eCarga2, eFuerza)));	
+				vista.getCarga().getTextCargaR().setText(String.valueOf(carga.calcularCarga(eCarga1, eFuerza, eDistancia)));	
 			}catch(NumberFormatException e1) {
 
 				vista.exportWindows("ERROR EN LOS DATOS.\nINGRESELOS NUEVAMENTE\n(Recuerde usar puntos para cifras decimales).", "ERROR", 0);
