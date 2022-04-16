@@ -3,15 +3,18 @@ package co.edu.unbosque.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import co.edu.unbosque.model.Cargas;
+import co.edu.unbosque.model.Potencial_Electrico;
 import co.edu.unbosque.view.VentanaPrincipal;
 
 public class Controller implements ActionListener{
 
 	private Cargas carga;
+	private Potencial_Electrico potencial;
 	private VentanaPrincipal vista;
 
 	public Controller() {
 		vista = new VentanaPrincipal();
+		potencial = new Potencial_Electrico();
 		carga = new Cargas();
 		oyentes();
 	}
@@ -48,6 +51,7 @@ public class Controller implements ActionListener{
 		vista.getFuerzaElectrica().getChckbxDistancia().addActionListener(this);
 		vista.getInicio().getBtnCampo().addActionListener(this);
 		vista.getInicio().getBtnCargas().addActionListener(this);
+		vista.getInicio().getBtnPotencial().addActionListener(this);
 		vista.getLeyCoulomb().getBtnCarga().addActionListener(this);
 		vista.getLeyCoulomb().getBtnDistancia().addActionListener(this);
 		vista.getLeyCoulomb().getBtnFuerza().addActionListener(this);
@@ -57,13 +61,33 @@ public class Controller implements ActionListener{
 		vista.getVarilla().getChckbxCarga1().addActionListener(this);
 		vista.getVarilla().getChckbxX().addActionListener(this);
 		vista.getVarilla().getChckbxA().addActionListener(this);
-		
+		vista.getEnergiaPotencial().getBtnSetCarga().addActionListener(this);
+		vista.getEnergiaPotencial().getBtnCalcularPotencial().addActionListener(this);
+		vista.getEnergiaPotencial().getBtnRegresar().addActionListener(this);
+		vista.getEnergiaPotencial().getList().addActionListener(this);
+		vista.getEnergiaPotencial().getChckbxEnergiaPotencialTotal().addActionListener(this);
+		vista.getEnergiaPotencial().getChckbxPotencialPunto().addActionListener(this);
+		vista.getEnergiaPotencial().getChckbxTrabajoCarga().addActionListener(this);
 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		String c = e.getActionCommand();
+
+		if(c.equals("BTN_POTENCIAL_I")) {
+			int cantCargas = Integer.parseInt(vista.inputWindows("¿Cuantas cargas cuenta el sistema?", "# Cargas", 1));
+			potencial.generarCantidadCargasPosiciones(cantCargas);
+
+			vista.getEnergiaPotencial().getList().addItem("");
+			for (int i = 0; i < cantCargas; i++) {
+				vista.getEnergiaPotencial().getList().addItem(i+1);
+			}
+
+			vista.getInicio().setVisible(false);
+			vista.getEnergiaPotencial().setVisible(true);
+			vista.setContentPane(vista.getEnergiaPotencial());
+		}
 
 		if(c.equals("BTN_CAMPO_I")) {
 			vista.getInicio().setVisible(false);
@@ -86,7 +110,9 @@ public class Controller implements ActionListener{
 			vista.getInicio().setVisible(true);
 			vista.getLeyCoulomb().setVisible(false);
 			vista.setContentPane(vista.getInicio());
-
+			
+			potencial.borrarDatos();;
+			vista.limpiarPanel(vista.getEnergiaPotencial());
 		}
 		if(c.equals("BTN_CARGA_LC")) {
 			vista.getLeyCoulomb().setVisible(false);
@@ -323,8 +349,107 @@ public class Controller implements ActionListener{
 		if(c.equals("CHK_A_V")) {
 			vista.getVarilla().validarCheck(3);
 		}
-		
-		
+
+		if(c.equals("CHK_P_Total") || c.equals("CHK_P_Punto") || c.equals("CHK_P_Carga")) {
+
+			String message = vista.getEnergiaPotencial().validarCheckPotencial();
+
+			if(!message.equals("")) {
+				vista.exportWindows(message, "Instrucciones", 1);	
+			}
+		}
+
+		if(c.equals("CARGA_LIST")) {
+			try {
+			if(!vista.getEnergiaPotencial().getList().getSelectedItem().equals("")) {
+				int numeroCarga = (int) vista.getEnergiaPotencial().getList().getSelectedItem();
+				vista.getEnergiaPotencial().getTextFieldValorCarga().setText(potencial.getCargas_Notacion()[0][numeroCarga-1]+"");
+				vista.getEnergiaPotencial().getTextFieldNotacionCarga().setText(potencial.getCargas_Notacion()[1][numeroCarga-1]+"");
+				vista.getEnergiaPotencial().getTextFieldPosicionX1().setText(potencial.getPosiciones()[0][numeroCarga-1]+"");
+				vista.getEnergiaPotencial().getTextFieldPosicionY1().setText(potencial.getPosiciones()[1][numeroCarga-1]+"");
+				vista.getEnergiaPotencial().getTextFieldPosicionZ1().setText(potencial.getPosiciones()[2][numeroCarga-1]+"");	
+				
+			}else {
+				vista.getEnergiaPotencial().getTextFieldValorCarga().setText("");
+				vista.getEnergiaPotencial().getTextFieldPosicionX1().setText("");
+				vista.getEnergiaPotencial().getTextFieldPosicionY1().setText("");
+				vista.getEnergiaPotencial().getTextFieldPosicionZ1().setText("");
+				vista.getEnergiaPotencial().getTextFieldNotacionCarga().setText("");
+			}
+			}catch(NullPointerException e_Null) {
+			}
+		}
+
+		if(c.equals("EDITAR_P_CARGA")) {
+
+			if(!vista.getEnergiaPotencial().getList().getSelectedItem().equals("")) {
+
+				int numeroCarga = (int) vista.getEnergiaPotencial().getList().getSelectedItem();
+				potencial.getCargas_Notacion()[0][numeroCarga-1] = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldValorCarga().getText()); 
+				potencial.getCargas_Notacion()[1][numeroCarga-1] = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCarga().getText());
+				
+				potencial.getCargas()[numeroCarga-1] = Math.pow(potencial.getCargas_Notacion()[0][numeroCarga-1],potencial.getCargas_Notacion()[1][numeroCarga-1]);
+				potencial.getPosiciones()[0][numeroCarga-1] = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText());
+				potencial.getPosiciones()[1][numeroCarga-1] =  Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText());
+				potencial.getPosiciones()[2][numeroCarga-1] = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText());
+				vista.exportWindows("Se ha guardado con éxito los datos", "Informacion", 2);
+			}else {
+				vista.exportWindows("Digite una carga valida para editar", "Informacion", 0);
+			}
+
+		}
+
+		if(c.equals("CALCULAR_POTENCIAL")) {
+			if(vista.getEnergiaPotencial().getChckbxEnergiaPotencialTotal().isSelected()) {
+
+				double resultado = potencial.calcularPotencialTotal();
+
+				if(resultado == (double) -1) {
+					vista.exportWindows("Hubo un error en el procesamiento de datos, retifique nuevamente los datos", "Error", 0);
+				}else {
+					vista.exportWindows("El potencial total es: "+ resultado, "Error", 0);
+				}
+
+			}else if(vista.getEnergiaPotencial().getChckbxPotencialPunto().isSelected()){
+
+				int[] posicionPunto = {Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText())};
+
+				double resultado = potencial.calcularEnergiaPotencial_Punto(posicionPunto);
+
+				if(resultado == (double) -1) {
+					vista.exportWindows("Hubo un error en el procesamiento de datos, retifique nuevamente los datos", "Error", 0);
+				}else {
+					vista.exportWindows("El potencial total es: "+ resultado, "Error", 0);
+				}
+
+			}else if(vista.getEnergiaPotencial().getChckbxTrabajoCarga().isSelected()) {
+
+				try{
+
+					int[] posicionInicial = {Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText())};
+					int[] posicionFinal = {Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ().getText())};
+
+					int carga = (int) vista.getEnergiaPotencial().getList().getSelectedItem();
+
+					double resultado = potencial.calcularTrabajoCarga(carga,posicionInicial,posicionFinal);
+
+					if(resultado == (double) -1) {
+						vista.exportWindows("Hubo un error en el procesamiento de datos, retifique nuevamente los datos", "Error", 0);
+					}else {
+						vista.exportWindows("El potencial total es: "+ resultado, "Error", 0);
+					}
+
+				}catch(Exception error) {
+					error.printStackTrace();
+				}
+
+			}else {
+				vista.exportWindows("Seleccione una opción", "Error", 0);
+			}
+
+		}
+
+
 	}
 
 

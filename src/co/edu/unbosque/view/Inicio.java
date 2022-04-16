@@ -18,6 +18,7 @@ public class Inicio extends JPanel {
 	private JLabel lblNombres;
 	private JButton btnCampo;
 	private JButton btnCargas;
+	private JButton btnPotencial;
 	private JLabel tittleLbl;
 	private ImageIcon img;
 
@@ -42,9 +43,15 @@ public class Inicio extends JPanel {
 		
 		btnCampo = new JButton("Campo Electrico");
 		btnCampo.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
-		btnCampo.setBounds(298, 293, 135, 40);
+		btnCampo.setBounds(240, 293, 135, 40);
 		btnCampo.setActionCommand("BTN_CAMPO_I");
 		add(btnCampo);
+
+		btnPotencial = new JButton("Energía Potencial");
+		btnPotencial.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
+		btnPotencial.setBounds(390, 293, 135, 40);
+		btnPotencial.setActionCommand("BTN_POTENCIAL_I");
+		add(btnPotencial);
 		
 		lblNombres = new JLabel("Kevin Garcia, Laura Mateus, Santiago Prieto, Jeanpierr Ramos, Camilo Uribe");
 		lblNombres.setHorizontalAlignment(SwingConstants.CENTER);
@@ -69,6 +76,10 @@ public class Inicio extends JPanel {
 
 	public JButton getBtnCampo() {
 		return btnCampo;
+	}
+
+	public JButton getBtnPotencial() {
+		return btnPotencial;
 	}
 
 	public JButton getBtnCargas() {

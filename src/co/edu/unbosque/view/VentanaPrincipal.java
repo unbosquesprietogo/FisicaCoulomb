@@ -25,6 +25,7 @@ public class VentanaPrincipal extends JFrame {
 	private FuerzaElectrica fuerzaElectrica;
 	private Distancia distancia;
 	private Carga carga;
+	private EnergiaPotencial energiaPotencial;
 	
 	public VentanaPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./Data/fisica.png"));
@@ -40,10 +41,10 @@ public class VentanaPrincipal extends JFrame {
 		fuerzaElectrica = new FuerzaElectrica();
 		leyCoulomb =new LeyCoulomb();
 		varilla= new Varilla();
-		
+		energiaPotencial = new EnergiaPotencial();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 540, 460);
+		setBounds(100, 100, 520, 440);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -87,6 +88,13 @@ public class VentanaPrincipal extends JFrame {
 	}
 	
 	public void limpiarPanel(JPanel panel) {
+		
+		if(panel == energiaPotencial) {
+		energiaPotencial.getList().removeAllItems();
+		energiaPotencial.getChckbxEnergiaPotencialTotal().setSelected(false);
+		energiaPotencial.getChckbxPotencialPunto().setSelected(false);
+		energiaPotencial.getChckbxTrabajoCarga().setSelected(false);
+		}
 		for(Object o : panel.getComponents()) {
 			if (o instanceof JTextField) {
 				((JTextField) o).setText(null);
@@ -125,6 +133,10 @@ public class VentanaPrincipal extends JFrame {
 
 	public Campo getCampo() {
 		return campo;
+	}
+
+	public EnergiaPotencial getEnergiaPotencial() {
+		return energiaPotencial;
 	}
 
 	public CampoElectrico getCampoElectrico() {
