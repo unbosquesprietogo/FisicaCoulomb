@@ -110,7 +110,7 @@ public class Controller implements ActionListener{
 			vista.getInicio().setVisible(true);
 			vista.getLeyCoulomb().setVisible(false);
 			vista.setContentPane(vista.getInicio());
-			
+
 			potencial.borrarDatos();;
 			vista.limpiarPanel(vista.getEnergiaPotencial());
 		}
@@ -361,21 +361,21 @@ public class Controller implements ActionListener{
 
 		if(c.equals("CARGA_LIST")) {
 			try {
-			if(!vista.getEnergiaPotencial().getList().getSelectedItem().equals("")) {
-				int numeroCarga = (int) vista.getEnergiaPotencial().getList().getSelectedItem();
-				vista.getEnergiaPotencial().getTextFieldValorCarga().setText(potencial.getCargas_Notacion()[0][numeroCarga-1]+"");
-				vista.getEnergiaPotencial().getTextFieldNotacionCarga().setText(potencial.getCargas_Notacion()[1][numeroCarga-1]+"");
-				vista.getEnergiaPotencial().getTextFieldPosicionX1().setText(potencial.getPosiciones()[0][numeroCarga-1]+"");
-				vista.getEnergiaPotencial().getTextFieldPosicionY1().setText(potencial.getPosiciones()[1][numeroCarga-1]+"");
-				vista.getEnergiaPotencial().getTextFieldPosicionZ1().setText(potencial.getPosiciones()[2][numeroCarga-1]+"");	
-				
-			}else {
-				vista.getEnergiaPotencial().getTextFieldValorCarga().setText("");
-				vista.getEnergiaPotencial().getTextFieldPosicionX1().setText("");
-				vista.getEnergiaPotencial().getTextFieldPosicionY1().setText("");
-				vista.getEnergiaPotencial().getTextFieldPosicionZ1().setText("");
-				vista.getEnergiaPotencial().getTextFieldNotacionCarga().setText("");
-			}
+				if(!vista.getEnergiaPotencial().getList().getSelectedItem().equals("")) {
+					int numeroCarga = (int) vista.getEnergiaPotencial().getList().getSelectedItem();
+					vista.getEnergiaPotencial().getTextFieldValorCarga().setText(potencial.getCargas_Notacion()[0][numeroCarga-1]+"");
+					vista.getEnergiaPotencial().getTextFieldNotacionCarga().setText(potencial.getCargas_Notacion()[1][numeroCarga-1]+"");
+					vista.getEnergiaPotencial().getTextFieldPosicionX1().setText(potencial.getPosiciones()[0][numeroCarga-1]+"");
+					vista.getEnergiaPotencial().getTextFieldPosicionY1().setText(potencial.getPosiciones()[1][numeroCarga-1]+"");
+					vista.getEnergiaPotencial().getTextFieldPosicionZ1().setText(potencial.getPosiciones()[2][numeroCarga-1]+"");	
+
+				}else {
+					vista.getEnergiaPotencial().getTextFieldValorCarga().setText("");
+					vista.getEnergiaPotencial().getTextFieldPosicionX1().setText("");
+					vista.getEnergiaPotencial().getTextFieldPosicionY1().setText("");
+					vista.getEnergiaPotencial().getTextFieldPosicionZ1().setText("");
+					vista.getEnergiaPotencial().getTextFieldNotacionCarga().setText("");
+				}
 			}catch(NullPointerException e_Null) {
 			}
 		}
@@ -387,11 +387,14 @@ public class Controller implements ActionListener{
 				int numeroCarga = (int) vista.getEnergiaPotencial().getList().getSelectedItem();
 				potencial.getCargas_Notacion()[0][numeroCarga-1] = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldValorCarga().getText()); 
 				potencial.getCargas_Notacion()[1][numeroCarga-1] = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCarga().getText());
-				
-				potencial.getCargas()[numeroCarga-1] = Math.pow(potencial.getCargas_Notacion()[0][numeroCarga-1],potencial.getCargas_Notacion()[1][numeroCarga-1]);
-				potencial.getPosiciones()[0][numeroCarga-1] = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText());
-				potencial.getPosiciones()[1][numeroCarga-1] =  Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText());
-				potencial.getPosiciones()[2][numeroCarga-1] = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText());
+
+				potencial.getCargas()[numeroCarga-1] = potencial.getCargas_Notacion()[0][numeroCarga-1]*Math.pow(10,potencial.getCargas_Notacion()[1][numeroCarga-1]);
+				potencial.setNotacionCientificaDistancia(Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()));
+
+				potencial.getPosiciones()[0][numeroCarga-1] = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText())*Math.pow(10, potencial.getNotacionCientificaDistancia());
+				potencial.getPosiciones()[1][numeroCarga-1] =  Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText())*Math.pow(10, potencial.getNotacionCientificaDistancia());
+				potencial.getPosiciones()[2][numeroCarga-1] = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText())*Math.pow(10, potencial.getNotacionCientificaDistancia());
+
 				vista.exportWindows("Se ha guardado con éxito los datos", "Informacion", 2);
 			}else {
 				vista.exportWindows("Digite una carga valida para editar", "Informacion", 0);
@@ -400,6 +403,7 @@ public class Controller implements ActionListener{
 		}
 
 		if(c.equals("CALCULAR_POTENCIAL")) {
+
 			if(vista.getEnergiaPotencial().getChckbxEnergiaPotencialTotal().isSelected()) {
 
 				double resultado = potencial.calcularPotencialTotal();
@@ -407,40 +411,58 @@ public class Controller implements ActionListener{
 				if(resultado == (double) -1) {
 					vista.exportWindows("Hubo un error en el procesamiento de datos, retifique nuevamente los datos", "Error", 0);
 				}else {
-					vista.exportWindows("El potencial total es: "+ resultado, "Error", 0);
+					vista.getEnergiaPotencial().getTextFieldResultados().setText(resultado+" J");
 				}
 
 			}else if(vista.getEnergiaPotencial().getChckbxPotencialPunto().isSelected()){
 
-				int[] posicionPunto = {Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText())};
+				double[] posicionPunto = {Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))
+						,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))
+						,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))};
 
 				double resultado = potencial.calcularEnergiaPotencial_Punto(posicionPunto);
 
 				if(resultado == (double) -1) {
 					vista.exportWindows("Hubo un error en el procesamiento de datos, retifique nuevamente los datos", "Error", 0);
 				}else {
-					vista.exportWindows("El potencial total es: "+ resultado, "Error", 0);
+					vista.getEnergiaPotencial().getTextFieldResultados().setText(resultado+" V");
 				}
 
 			}else if(vista.getEnergiaPotencial().getChckbxTrabajoCarga().isSelected()) {
 
-				try{
 
-					int[] posicionInicial = {Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText())};
-					int[] posicionFinal = {Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY().getText()),Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ().getText())};
+				double[] posicionInicial = null;
+				try {	
+					
+					double[] posiciones = {Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia().getText()))
+							,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia().getText()))
+							,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia().getText()))};
+					posicionInicial = posiciones;
 
-					int carga = (int) vista.getEnergiaPotencial().getList().getSelectedItem();
+					double[] posicionFinal = 
+							{Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))
+							,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))
+							,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))};
 
-					double resultado = potencial.calcularTrabajoCarga(carga,posicionInicial,posicionFinal);
 
+					double resultado =0;
+					
+					double carga = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldValorCarga().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCarga().getText()));
+
+					if(Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX().getText())==-1) {
+						resultado = potencial.calcularTrabajoCarga(carga,posicionInicial,posicionFinal,false);
+					}else {
+						resultado = potencial.calcularTrabajoCarga(carga,posicionInicial,posicionFinal,true);	
+					}
+					
 					if(resultado == (double) -1) {
 						vista.exportWindows("Hubo un error en el procesamiento de datos, retifique nuevamente los datos", "Error", 0);
 					}else {
-						vista.exportWindows("El potencial total es: "+ resultado, "Error", 0);
-					}
 
-				}catch(Exception error) {
-					error.printStackTrace();
+						vista.getEnergiaPotencial().getTextFieldResultados().setText(resultado+" J");
+					}
+				}catch(Exception sinInicial) {
+					vista.exportWindows("Cometió algun error en la digitación, vuelva a intentarlo", "Error", 0);
 				}
 
 			}else {

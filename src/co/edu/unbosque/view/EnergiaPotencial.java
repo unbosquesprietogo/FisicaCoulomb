@@ -32,6 +32,9 @@ public class EnergiaPotencial extends JPanel {
 	private JButton btnRegresar;
 	private JTextField textFieldNotacionCarga;
 	private JLabel lblNotacionCientifica;
+	private JTextField textFieldNotacionCargaDistancia1;
+	private JLabel lblDistanciaNotacion_1;
+	private JTextField textFieldNotacionCargaDistancia;
 
 	/**
 	 * Create the panel.
@@ -66,31 +69,31 @@ public class EnergiaPotencial extends JPanel {
 		add(chckbxTrabajoCarga);
 		
 		JLabel lblPosicionX = new JLabel("X:");
-		lblPosicionX.setBounds(161, 200, 21, 14);
+		lblPosicionX.setBounds(119, 198, 21, 14);
 		add(lblPosicionX);
 		
 		textFieldPosicionX = new JTextField();
-		textFieldPosicionX.setBounds(187, 197, 50, 20);
+		textFieldPosicionX.setBounds(145, 195, 50, 20);
 		textFieldPosicionX.setEditable(false);
 		add(textFieldPosicionX);
 		textFieldPosicionX.setColumns(10);
 		
 		JLabel lblPosicionY = new JLabel("Y:");
-		lblPosicionY.setBounds(251, 200, 10, 14);
+		lblPosicionY.setBounds(209, 198, 10, 14);
 		add(lblPosicionY);
 		
 		textFieldPosicionY = new JTextField();
-		textFieldPosicionY.setBounds(266, 197, 43, 20);
+		textFieldPosicionY.setBounds(224, 195, 43, 20);
 		textFieldPosicionY.setEditable(false);
 		add(textFieldPosicionY);
 		textFieldPosicionY.setColumns(10);
 		
 		JLabel lblPosicionZ = new JLabel("Z:");
-		lblPosicionZ.setBounds(325, 200, 14, 14);
+		lblPosicionZ.setBounds(283, 198, 14, 14);
 		add(lblPosicionZ);
 		
 		textFieldPosicionZ = new JTextField();
-		textFieldPosicionZ.setBounds(338, 197, 48, 20);
+		textFieldPosicionZ.setBounds(296, 195, 48, 20);
 		textFieldPosicionZ.setEditable(false);
 		add(textFieldPosicionZ);
 		textFieldPosicionZ.setColumns(10);
@@ -118,34 +121,34 @@ public class EnergiaPotencial extends JPanel {
 		add(lblNotacionCientifica);
 		
 		textFieldNotacionCarga = new JTextField();
-		textFieldNotacionCarga.setBounds(313, 223, 72, 20);
+		textFieldNotacionCarga.setBounds(296, 223, 72, 20);
 		add(textFieldNotacionCarga);
 		textFieldNotacionCarga.setColumns(10);
 		
 		JLabel lblPosicionX1 = new JLabel("X1:");
-		lblPosicionX1.setBounds(161, 252, 21, 14);
+		lblPosicionX1.setBounds(119, 254, 21, 14);
 		add(lblPosicionX1);
 		
 		textFieldPosicionX1 = new JTextField();
-		textFieldPosicionX1.setBounds(187, 249, 50, 20);
+		textFieldPosicionX1.setBounds(145, 251, 50, 20);
 		add(textFieldPosicionX1);
 		textFieldPosicionX1.setColumns(10);
 		
 		JLabel lblPosicionY1 = new JLabel("Y1:");
-		lblPosicionY1.setBounds(247, 252, 21, 14);
+		lblPosicionY1.setBounds(205, 254, 21, 14);
 		add(lblPosicionY1);
 		
 		textFieldPosicionY1 = new JTextField();
-		textFieldPosicionY1.setBounds(266, 249, 43, 20);
+		textFieldPosicionY1.setBounds(224, 251, 43, 20);
 		add(textFieldPosicionY1);
 		textFieldPosicionY1.setColumns(10);
 		
 		JLabel lblPosicionZ1 = new JLabel("Z1:");
-		lblPosicionZ1.setBounds(320, 252, 19, 14);
+		lblPosicionZ1.setBounds(278, 254, 19, 14);
 		add(lblPosicionZ1);
 		
 		textFieldPosicionZ1 = new JTextField();
-		textFieldPosicionZ1.setBounds(338, 249, 48, 20);
+		textFieldPosicionZ1.setBounds(296, 251, 48, 20);
 		add(textFieldPosicionZ1);
 		textFieldPosicionZ1.setColumns(10);
 		
@@ -171,6 +174,24 @@ public class EnergiaPotencial extends JPanel {
 		textFieldResultados.setBounds(181, 352, 225, 20);
 		add(textFieldResultados);
 		textFieldResultados.setColumns(10);
+		
+		textFieldNotacionCargaDistancia1 = new JTextField();
+		textFieldNotacionCargaDistancia1.setBounds(380, 251, 86, 20);
+		add(textFieldNotacionCargaDistancia1);
+		textFieldNotacionCargaDistancia1.setColumns(10);
+		
+		JLabel lblDistanciaNotacion = new JLabel("x10 E");
+		lblDistanciaNotacion.setBounds(350, 254, 46, 14);
+		add(lblDistanciaNotacion);
+		
+		lblDistanciaNotacion_1 = new JLabel("x10 E");
+		lblDistanciaNotacion_1.setBounds(350, 198, 46, 14);
+		add(lblDistanciaNotacion_1);
+		
+		textFieldNotacionCargaDistancia = new JTextField();
+		textFieldNotacionCargaDistancia.setColumns(10);
+		textFieldNotacionCargaDistancia.setBounds(380, 195, 86, 20);
+		add(textFieldNotacionCargaDistancia);
 		
 	}
 
@@ -220,7 +241,7 @@ public class EnergiaPotencial extends JPanel {
 			   "junto a su posición en los cuadros x1-y1-z1, posteriormente"+"\n"+
 			   "de click en editar carga. Ahora, seleccione la carga que"+"\n"+
 			   "desea encontrar el trabajo y digite las coordenadas teniendo"+"\n"+
-			   "en cuenta, ('X1'-inicial) ('X'-final ), sin olvidar digitar"+"\n"+
+			   "en cuenta, ('X1'-Final) ('X'-Inicial), sin olvidar digitar"+"\n"+
 			   "el valor de carga respectiva para finalizar dando click en calcular";
 		}else {
 			getTextFieldPosicionX().setEditable(false);
@@ -233,6 +254,14 @@ public class EnergiaPotencial extends JPanel {
 	
 	
 	
+	public JTextField getTextFieldNotacionCargaDistancia1() {
+		return textFieldNotacionCargaDistancia1;
+	}
+
+	public JTextField getTextFieldNotacionCargaDistancia() {
+		return textFieldNotacionCargaDistancia;
+	}
+
 	public JTextField getTextFieldNotacionCarga() {
 		return textFieldNotacionCarga;
 	}
@@ -328,5 +357,4 @@ public class EnergiaPotencial extends JPanel {
 	public void setList(JComboBox list) {
 		this.list = list;
 	}
-	
 }
