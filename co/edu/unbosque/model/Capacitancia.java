@@ -36,19 +36,18 @@ public class Capacitancia {
 		
 	}
 	
-	public double capacitanciaSerie(int cantcap, double[] capacitor) {
+	public double capacitanciaSerie() {
 		double res1 = 0.0;
-		for(int i = 0;i<cantcap;i++) {
-			
+		for(int i = 0;i<capacitor.length;i++) {
 			res1 = (1/capacitor[i])+res1; 			
 		}
 		
 		return (1/res1);
 	}
 	
-	public double capacitanciaParalelo(int cantcap, double capacitor[]) {
+	public double capacitanciaParalelo() {
 		double res1 = 0.0;
-		for(int i = 0;i<cantcap;i++) {
+		for(int i = 0;i<capacitor.length;i++) {
 			res1 = res1+capacitor[i];
 		}
 		return res1;

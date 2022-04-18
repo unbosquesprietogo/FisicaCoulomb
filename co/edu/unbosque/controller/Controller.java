@@ -135,7 +135,7 @@ public class Controller implements ActionListener{
 		String c = e.getActionCommand();
 
 		if(c.equals("BTN_CIRCUITOS_I")) {
-			int cantCargas = Integer.parseInt(vista.inputWindows("¿Cuantas cargas cuenta el circuito?", "# Cargas", 1));
+			int cantCargas = Integer.parseInt(vista.inputWindows("¿Cuantas capacitores cuenta el circuito?", "# capacitores", 1));
 			capacitancia.inicializar_arreglos(cantCargas);
 			for (int i = 0; i < cantCargas; i++) {
 				vista.getCapacitoresCircuitos().getListCargasCircuitos().addItem(i+1);
@@ -900,11 +900,9 @@ public class Controller implements ActionListener{
 
 		if(c.equals("CALCULAR_CIRCUITOS")) {
 			if(vista.getCapacitoresCircuitos().getChckbxCircuitoParalelo().isSelected()) {
-
-
-
+				vista.getCapacitoresCircuitos().getTextField_2().setText(capacitancia.capacitanciaParalelo()+" F");
 			}else if(vista.getCapacitoresCircuitos().getChckbxCircuitoSerie().isSelected()) {
-
+				vista.getCapacitoresCircuitos().getTextField_2().setText(capacitancia.capacitanciaSerie()+" F");
 			}else {
 				vista.exportWindows("Seleccione una opción valida", "Error", 0);
 			}
@@ -938,6 +936,6 @@ public class Controller implements ActionListener{
 			vista.limpiarPanel(vista.getCapacitanciaDielectrica());
 		}
 
-
+		
 	}
 }
