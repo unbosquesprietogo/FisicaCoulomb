@@ -22,6 +22,7 @@ public class Inicio extends JPanel {
 	private JButton btnPotencial;
 	private JLabel tittleLbl;
 	private ImageIcon img;
+	private JButton btnCapacitancia;
 
 	/**
 	 * Create the panel.
@@ -62,7 +63,7 @@ public class Inicio extends JPanel {
 		
 		lblNombres = new JLabel("Kevin Garcia, Laura Mateus, Santiago Prieto, Jeanpierr Ramos, Camilo Uribe");
 		lblNombres.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombres.setBounds(23, 375, 487, 14);
+		lblNombres.setBounds(23, 386, 487, 14);
 		add(lblNombres);
 		
 		img = new ImageIcon("./Data/fisica.png");
@@ -70,9 +71,16 @@ public class Inicio extends JPanel {
 		lblImage.setBounds(163, 81, 200, 201);
 		lblImage.setIcon(new ImageIcon(img.getImage()));
 		add(lblImage);	
+		
+		btnCapacitancia = new JButton("Capacitancia");
+		btnCapacitancia.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
+		btnCapacitancia.setActionCommand("BTN_CAPACITANCIA_I");
+		btnCapacitancia.setBounds(129, 335, 135, 40);
+		add(btnCapacitancia);
 
 	}
 
+<<<<<<< HEAD
 	
 	
 	public JButton getBtnLeyGauss() {
@@ -81,6 +89,12 @@ public class Inicio extends JPanel {
 
 
 
+=======
+	public JButton getBtnCapacitancia() {
+		return btnCapacitancia;
+	}
+
+>>>>>>> Lotso
 	public JLabel getLblImage() {
 		return lblImage;
 	}
