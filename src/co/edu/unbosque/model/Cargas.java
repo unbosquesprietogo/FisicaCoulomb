@@ -1,12 +1,18 @@
 package co.edu.unbosque.model;
 
+import java.util.ArrayList;
+
 public class Cargas {
 	
 	private double carga1, carga2, fuerza, distancia, a, x;
+	private double[] coordenadas1, coordenadas2 ; 
+	private ArrayList<String> coordenadas;
 
 	public Cargas() {
 		
 		carga1=carga2=fuerza=distancia=0.0;
+		coordenadas1 = coordenadas2 = new double[3];
+		coordenadas = new ArrayList<>();
 	}
 	
 	public double calcularCarga(int eCarga,int eFuerza, int eDistancia) {
@@ -43,7 +49,93 @@ public class Cargas {
 	
 	}
 	
+	public double calcularDistanciaEntrePuntos() {
+		
+		double x1 = coordenadas1[0];
+		double y1 = coordenadas1[1];
+		double z1 = coordenadas1[2];
+		double x2 = coordenadas2[0];
+		double y2 = coordenadas2[1];
+		double z2 = coordenadas2[2];
+		
+		
+		return Math.sqrt((Math.pow((x2-x1), 2))+(Math.pow((y2-y1), 2))+(Math.pow((z2-z1), 2)));
+		
+	}
 	
+	public void agregarCarga(int eCarga){
+		
+		double x1 = coordenadas1[0];
+		double y1 = coordenadas1[1];
+		double z1 = coordenadas1[2];
+		double x2 = coordenadas2[0];
+		double y2 = coordenadas2[1];
+		double z2 = coordenadas2[2];
+		
+		distancia= calcularDistanciaEntrePuntos();
+		double campo = (calcularCampo(eCarga, 0));
+		
+		
+		
+		double campoX = campo*((Math.abs(x2-x1))/distancia);
+		double campoY = campo*((Math.abs(y2-y1))/distancia);
+		double campoZ = campo*((Math.abs(z2-z1))/distancia);
+		
+		
+		String linea = carga1+","+eCarga+","+x1+","+y1+","+z1+","+campoX+","+campoY+","+campoZ;
+		coordenadas.add(linea);
+		
+	
+	}
+	
+	public double calcularCampoVectorial() {
+		
+		double campo=0.0;
+		double componenteX=0.0;
+		double componenteY=0.0;
+		double componenteZ=0.0;
+		
+		for (int i = 0; i < coordenadas.size(); i++) {
+			componenteX += Double.parseDouble(coordenadas.get(i).split(",")[5]);
+			componenteY += Double.parseDouble(coordenadas.get(i).split(",")[6]);
+			componenteZ += Double.parseDouble(coordenadas.get(i).split(",")[7]);
+		
+		}
+		
+		coordenadas.clear();
+		campo= Math.sqrt((Math.pow(componenteX, 2))+(Math.pow(componenteY, 2))+(Math.pow(componenteZ, 2)));
+		
+		return campo;
+		
+	}
+	
+	
+	
+	
+	public double[] getCoordenadas1() {
+		return coordenadas1;
+	}
+
+	public void setCoordenadas1(double[] coordenadas1) {
+		this.coordenadas1 = coordenadas1;
+	}
+
+	public double[] getCoordenadas2() {
+		return coordenadas2;
+	}
+
+	public void setCoordenadas2(double[] coordenadas2) {
+		this.coordenadas2 = coordenadas2;
+	}
+
+	public ArrayList<String> getCoordenadas() {
+		return coordenadas;
+	}
+
+	public void setCoordenadas(ArrayList<String> coordenadas) {
+		this.coordenadas = coordenadas;
+	}
+
 	public double getA() {
 		return a;
 	}

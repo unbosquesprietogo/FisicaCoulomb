@@ -15,6 +15,10 @@ import java.util.Iterator;
 
 public class VentanaPrincipal extends JFrame {
 
+	private LeyGauss leyGauss;
+	private LeyGaussCilindro leyGaussCilindro;
+	private LeyGaussEsfera leyGaussEsfera;
+	private LeyGaussCuadrado leyGaussCuadrado;
 	private JPanel contentPane;
 	private Inicio inicio;
 	private Anillo anillo;
@@ -26,6 +30,9 @@ public class VentanaPrincipal extends JFrame {
 	private Distancia distancia;
 	private Carga carga;
 	private EnergiaPotencial energiaPotencial;
+	private Campo2 campo2;
+	private CampoElectrico2 campoElectrico2; 
+	private CapacitanciaDielectrica capacitanciaDielectrica;
 	
 	public VentanaPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./Data/fisica.png"));
@@ -42,7 +49,13 @@ public class VentanaPrincipal extends JFrame {
 		leyCoulomb =new LeyCoulomb();
 		varilla= new Varilla();
 		energiaPotencial = new EnergiaPotencial();
-		
+		campo2 = new Campo2();
+		campoElectrico2 = new CampoElectrico2();
+		leyGauss = new LeyGauss();
+		leyGaussCilindro = new LeyGaussCilindro();
+		leyGaussCuadrado = new LeyGaussCuadrado();
+		leyGaussEsfera = new LeyGaussEsfera();
+		capacitanciaDielectrica = new CapacitanciaDielectrica();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 520, 440);
 		contentPane = new JPanel();
@@ -119,6 +132,28 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 
+	
+	
+	public LeyGaussCilindro getLeyGaussCilindro() {
+		return leyGaussCilindro;
+	}
+
+	public LeyGaussEsfera getLeyGaussEsfera() {
+		return leyGaussEsfera;
+	}
+
+	public LeyGaussCuadrado getLeyGaussCuadrado() {
+		return leyGaussCuadrado;
+	}
+
+	public CampoElectrico2 getCampoElectrico2() {
+		return campoElectrico2;
+	}
+
+	public Campo2 getCampo2() {
+		return campo2;
+	}
+
 	public JPanel getContentPane() {
 		return contentPane;
 	}
@@ -162,7 +197,14 @@ public class VentanaPrincipal extends JFrame {
 	public Carga getCarga() {
 		return carga;
 	}
+
+	public LeyGauss getLeyGauss() {
+		return leyGauss;
+	}
 	
+	public CapacitanciaDielectrica getCapacitanciaDielectrica() {
+		return capacitanciaDielectrica;
+	}
 	
 
 }
