@@ -13,7 +13,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class Paneles extends JPanel {
+public class CampoCapacitanciaPanel extends JPanel {
 
 	private JPanel contentPane;
 	private JTextField textFieldCarga;
@@ -22,50 +22,111 @@ public class Paneles extends JPanel {
 	private JTextField textField_1;
 	private Panel2 Panel2;
 	private Panel1 Panel1;
+	private JButton btnRegresar;
+	private JRadioButton rdbtnNewRadioButton;
+	private JRadioButton rdbtnNewRadioButton_1;
 	
 
 	/**
 	 * Create the frame.
 	 */
-	public Paneles() {
+	public CampoCapacitanciaPanel() {
 		
 		
-		setBounds(100, 100, 520, 400);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(null);
-		
-
+		setLayout(null);
 
 		
-		JButton btnRegresar = new JButton("Regresar");
+		btnRegresar = new JButton("Regresar");
 		btnRegresar.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 11));
 		btnRegresar.setBounds(0, 0, 89, 23);
-		contentPane.add(btnRegresar);
+		add(btnRegresar);
 		
 		JLabel lblNewLabel = new JLabel("Capacitancia Placas");
 		lblNewLabel.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 36));
 		lblNewLabel.setBounds(114, 0, 282, 30);
-		contentPane.add(lblNewLabel);
+		add(lblNewLabel);
 		
 		JLabel lblNewLabel_2 = new JLabel("Seleccione seg\u00FAn sus datos");
 		lblNewLabel_2.setBounds(67, 58, 131, 14);
-		contentPane.add(lblNewLabel_2);
+		add(lblNewLabel_2);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Opci\u00F3n 1");
+		rdbtnNewRadioButton = new JRadioButton("Opci\u00F3n 1");
 		rdbtnNewRadioButton.setBounds(247, 54, 67, 23);
-		contentPane.add(rdbtnNewRadioButton);
+		add(rdbtnNewRadioButton);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Opci\u00F3n 2");
+		rdbtnNewRadioButton_1 = new JRadioButton("Opci\u00F3n 2");
 		rdbtnNewRadioButton_1.setBounds(349, 53, 67, 23);
-		contentPane.add(rdbtnNewRadioButton_1);
+		add(rdbtnNewRadioButton_1);
+		Panel2 = new Panel2();
 		
 		Panel1 = new Panel1();
 		Panel1.setBounds(10, 121, Panel1.getWidth(), Panel1.getHeight());
-		contentPane.add(Panel1);
+		add(Panel1);
 		
 	}
 	
+	
+	
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+
+
+
+	public JTextField getTextFieldCarga() {
+		return textFieldCarga;
+	}
+
+
+
+	public JTextField getTextFieldNC1() {
+		return textFieldNC1;
+	}
+
+
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+
+
+	public JTextField getTextField_1() {
+		return textField_1;
+	}
+
+
+
+	public Panel2 getPanel2() {
+		return Panel2;
+	}
+
+
+
+	public Panel1 getPanel1() {
+		return Panel1;
+	}
+
+
+
+	public JButton getBtnRegresar() {
+		return btnRegresar;
+	}
+
+
+
+	public JRadioButton getRdbtnNewRadioButton() {
+		return rdbtnNewRadioButton;
+	}
+
+
+
+	public JRadioButton getRdbtnNewRadioButton_1() {
+		return rdbtnNewRadioButton_1;
+	}
+
+
+
 	public void ponerPanel1() {
 		
 		remove(Panel1);

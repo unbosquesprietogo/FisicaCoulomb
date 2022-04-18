@@ -15,6 +15,9 @@ import java.util.Iterator;
 
 public class VentanaPrincipal extends JFrame {
 
+	private CampoCapacitanciaPanel campoCapacitanciaPanel;
+	private Panel1 panel1;
+	private Panel2 panel2;
 	private LeyGauss leyGauss;
 	private CapacitoresCircuitos capacitoresCircuitos;
 	private LeyGaussCilindro leyGaussCilindro;
@@ -39,7 +42,6 @@ public class VentanaPrincipal extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./Data/fisica.png"));
 		setTitle("FISICA ELECTRICA");
 		
-		
 		inicio = new Inicio();
 		anillo = new Anillo();
 		campo = new Campo();
@@ -52,6 +54,9 @@ public class VentanaPrincipal extends JFrame {
 		energiaPotencial = new EnergiaPotencial();
 		campo2 = new Campo2();
 		campoElectrico2 = new CampoElectrico2();
+		campoCapacitanciaPanel = new CampoCapacitanciaPanel();
+		panel1 = new Panel1();
+		panel2 = new Panel2();
 		leyGauss = new LeyGauss();
 		leyGaussCilindro = new LeyGaussCilindro();
 		leyGaussCuadrado = new LeyGaussCuadrado();
@@ -140,9 +145,19 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 	}
+	
+	public Panel1 getPanel1() {
+		return panel1;
+	}
 
-	
-	
+	public Panel2 getPanel2() {
+		return panel2;
+	}
+
+	public CampoCapacitanciaPanel getCampoCapacitanciaPanel() {
+		return campoCapacitanciaPanel;
+	}
+
 	public CapacitoresCircuitos getCapacitoresCircuitos() {
 		return capacitoresCircuitos;
 	}

@@ -2,6 +2,8 @@ package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import co.edu.unbosque.model.Capacitancia;
 import co.edu.unbosque.model.Cargas;
 import co.edu.unbosque.model.LeyDeGauss;
 import co.edu.unbosque.model.Potencial_Electrico;
@@ -13,9 +15,11 @@ public class Controller implements ActionListener{
 	private Potencial_Electrico potencial;
 	private LeyDeGauss leyDeGauss;
 	private VentanaPrincipal vista;
+	private Capacitancia capacitancia;
 
 	public Controller() {
 		vista = new VentanaPrincipal();
+		capacitancia = new Capacitancia();
 		potencial = new Potencial_Electrico();
 		leyDeGauss = new LeyDeGauss();
 		carga = new Cargas();
@@ -59,6 +63,8 @@ public class Controller implements ActionListener{
 		vista.getInicio().getBtnLeyGauss().addActionListener(this);
 		vista.getInicio().getBtnCapacitancia().addActionListener(this);
 		vista.getInicio().getBtnCircuitosCapacitores().addActionListener(this);
+		vista.getInicio().getBtnCampoCapacitancia().addActionListener(this);
+
 
 		vista.getLeyCoulomb().getBtnCarga().addActionListener(this);
 		vista.getLeyCoulomb().getBtnDistancia().addActionListener(this);
@@ -111,6 +117,14 @@ public class Controller implements ActionListener{
 		vista.getCapacitanciaDielectrica().getBtnPermitividad().addActionListener(this);
 		vista.getCapacitanciaDielectrica().getButton().addActionListener(this);
 
+		vista.getCapacitanciaDielectrica().getButton().addActionListener(this);
+		vista.getCapacitoresCircuitos().getBtnCalcularCircuito().addActionListener(this);
+		vista.getCapacitoresCircuitos().getBtnRegresar().addActionListener(this);
+		vista.getCapacitoresCircuitos().getBtnSetCarga().addActionListener(this);
+		vista.getCapacitoresCircuitos().getListCargasCircuitos().addActionListener(this);
+		
+
+
 
 
 
@@ -122,8 +136,7 @@ public class Controller implements ActionListener{
 
 		if(c.equals("BTN_CIRCUITOS_I")) {
 			int cantCargas = Integer.parseInt(vista.inputWindows("¿Cuantas cargas cuenta el circuito?", "# Cargas", 1));
-			//capacitancia.generarCantidadCargasPosiciones(cantCargas);
-
+			capacitancia.inicializar_arreglos(cantCargas);
 			for (int i = 0; i < cantCargas; i++) {
 				vista.getCapacitoresCircuitos().getListCargasCircuitos().addItem(i+1);
 			}
@@ -152,10 +165,15 @@ public class Controller implements ActionListener{
 			vista.getCampoElectrico().setVisible(true);
 			vista.setContentPane(vista.getCampoElectrico());
 		}
+
 		if(c.equals("BTN_CAMPO_CAPACITANCIA_I")){
 			vista.getInicio().setVisible(false);
-			vista.getCampoElectrico().setVisible(true);
-			vista.setContentPane(vista.getCampoElectrico());
+			vista.getCampoCapacitanciaPanel().setVisible(true);
+			System.out.println("hola");
+			vista.getCampoCapacitanciaPanel().getPanel2().setVisible(true);
+			vista.getCampoCapacitanciaPanel().getPanel1().setVisible(true);
+			vista.getCampoCapacitanciaPanel().ponerPanel1();
+			vista.setContentPane(vista.getCampoCapacitanciaPanel());
 		}
 
 		if(c.equals("BTN_CAPACITANCIA_I")) {
@@ -892,25 +910,28 @@ public class Controller implements ActionListener{
 			}
 		}
 
-		if(c.equals("EDITAR_C_CARGA")) {
+		if(c.equals("EDITAR_CIRCUITOS_CARGA")) {
 
 			int numeroCarga = (int) vista.getCapacitoresCircuitos().getListCargasCircuitos().getSelectedItem();
 
-			//			capacitancia.getCargas_Notacion()[0][numeroCarga-1] = Double.parseDouble(vista.getCapacitoresCircuitos().getTextField()).getText()); 
-			//			capacitancia.getCargas_Notacion()[1][numeroCarga-1] = Double.parseDouble(vista.getCapacitoresCircuitos().getTextField1().getText());
-			//
-			//			capacitancia.getCargas()[numeroCarga-1] = capacitancia.getCargas_Notacion()[0][numeroCarga-1]*Math.pow(10,potencial.getCargas_Notacion()[1][numeroCarga-1]);
-			//			potencial.setNotacionCientificaDistancia(Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()));
-			//
-			//			potencial.getPosiciones()[0][numeroCarga-1] = Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText())*Math.pow(10, potencial.getNotacionCientificaDistancia());
-			//			potencial.getPosiciones()[1][numeroCarga-1] =  Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText())*Math.pow(10, potencial.getNotacionCientificaDistancia());
-			//			potencial.getPosiciones()[2][numeroCarga-1] = Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText())*Math.pow(10, potencial.getNotacionCientificaDistancia());
+			capacitancia.getCapacitor_NC()[0][numeroCarga-1] = Double.parseDouble(vista.getCapacitoresCircuitos().getTextField().getText()); 
+			capacitancia.getCapacitor_NC()[1][numeroCarga-1] = Double.parseDouble(vista.getCapacitoresCircuitos().getTextField_1().getText());
 
+			capacitancia.getCapacitor()[numeroCarga-1] = capacitancia.getCapacitor_NC()[0][numeroCarga-1]*Math.pow(10,capacitancia.getCapacitor_NC()[1][numeroCarga-1]);
+			
 			vista.exportWindows("Se ha guardado con éxito los datos", "Informacion", 2);
 
 		}
-		if(c.equals("B_VOLVER")) {
+
+		if(c.equals("CARGA_LIST")) {
+			int numeroCarga = (int) vista.getCapacitoresCircuitos().getListCargasCircuitos().getSelectedItem();
 			
+			vista.getCapacitoresCircuitos().getTextField().setText(capacitancia.getCapacitor_NC()[0][numeroCarga-1]+"");
+			vista.getCapacitoresCircuitos().getTextField_1().setText(capacitancia.getCapacitor_NC()[1][numeroCarga-1]+"");
+		}
+		
+		if(c.equals("B_VOLVER")) {
+
 			vista.getInicio().setVisible(true);
 			vista.getCapacitanciaDielectrica().setVisible(false);
 			vista.setContentPane(vista.getInicio());

@@ -10,6 +10,11 @@ import javax.swing.JTextField;
 
 public class Panel1 extends JPanel {
 	private JTextField textField_1;
+	private JCheckBox chckbxNewCheckBox;
+	private JTextField textFieldCarga;
+	private JTextField textFieldNC1;
+	private JTextField textField;
+	private JButton btnNewButton;
 
 	/**
 	 * Create the panel.
@@ -24,7 +29,7 @@ public class Panel1 extends JPanel {
 		lblNewLabel_1.setBounds(91, 11, 89, 14);
 		add(lblNewLabel_1);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Carga");
+		chckbxNewCheckBox = new JCheckBox("Carga");
 		chckbxNewCheckBox.setBounds(200, 7, 55, 23);
 		add(chckbxNewCheckBox);
 		
@@ -33,7 +38,7 @@ public class Panel1 extends JPanel {
 		lblNewLabel_3.setBounds(50, 58, 35, 14);
 		add(lblNewLabel_3);
 		
-		JTextField textFieldCarga = new JTextField();
+		textFieldCarga = new JTextField();
 		textFieldCarga.setBounds(94, 54, 86, 20);
 		add(textFieldCarga);
 		textFieldCarga.setColumns(10);
@@ -48,7 +53,7 @@ public class Panel1 extends JPanel {
 		lblNewLabel_3_2.setBounds(249, 57, 35, 14);
 		add(lblNewLabel_3_2);
 		
-		JTextField textFieldNC1 = new JTextField();
+		textFieldNC1 = new JTextField();
 		textFieldNC1.setColumns(10);
 		textFieldNC1.setBounds(294, 54, 86, 20);
 		add(textFieldNC1);
@@ -58,7 +63,7 @@ public class Panel1 extends JPanel {
 		lblNewLabel_3_3.setBounds(41, 124, 44, 14);
 		add(lblNewLabel_3_3);
 		
-		JTextField textField = new JTextField();
+		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(91, 120, 86, 20);
 		add(textField);
@@ -68,7 +73,7 @@ public class Panel1 extends JPanel {
 		lblNewLabel_3_1_1.setBounds(189, 123, 16, 14);
 		add(lblNewLabel_3_1_1);
 		
-		JButton btnNewButton = new JButton("Resolver");
+		btnNewButton = new JButton("Resolver");
 		btnNewButton.setFont(new Font("Franklin Gothic Demi", Font.PLAIN, 15));
 		btnNewButton.setBounds(200, 165, 106, 39);
 		add(btnNewButton);
@@ -100,5 +105,31 @@ public class Panel1 extends JPanel {
 		textField_1.setColumns(10);
 
 	}
+
+	public JTextField getTextField_1() {
+		return textField_1;
+	}
+
+	public JCheckBox getChckbxNewCheckBox() {
+		return chckbxNewCheckBox;
+	}
+
+	public JTextField getTextFieldCarga() {
+		return textFieldCarga;
+	}
+
+	public JTextField getTextFieldNC1() {
+		return textFieldNC1;
+	}
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public JButton getBtnNewButton() {
+		return btnNewButton;
+	}
+	
+	
 
 }
