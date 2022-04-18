@@ -24,13 +24,13 @@ public class Capacitancia {
 		
 	}
 	
-	public double capacitanciaCilindrica(double rad1, double rad2, double epsilon, double longi) {
+	public double capacitanciaCilindrica(double rad1, double rad2, double longi) {
 		
 		return (((2*Math.PI)*epsilon*longi)/Math.log(rad1/rad2));
 		
 	}
 	
-	public double capacitanciaEsferica(double rad1, double rad2, double epsilon) {
+	public double capacitanciaEsferica(double rad1, double rad2) {
 		
 		return (((4*Math.PI)*epsilon)*((rad1*rad2)/(rad2-rad1)));
 		
