@@ -90,7 +90,7 @@ public class Inicio extends JPanel {
 		btnCampoCapacitancia .setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
 		btnCampoCapacitancia .setActionCommand("BTN_CAMPO_CAPACITANCIA_I");
 		btnCampoCapacitancia .setBounds(42, 250, 148, 40);
-		add(btnCampoCapacitancia );
+		add(btnCampoCapacitancia);
 
 
 	}

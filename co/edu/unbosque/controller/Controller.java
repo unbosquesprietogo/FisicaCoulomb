@@ -109,7 +109,7 @@ public class Controller implements ActionListener{
 		vista.getCapacitanciaDielectrica().getBtnDensidadCarga().addActionListener(this);
 		vista.getCapacitanciaDielectrica().getBtnDensidadEnergia().addActionListener(this);
 		vista.getCapacitanciaDielectrica().getBtnPermitividad().addActionListener(this);
-
+		vista.getCapacitanciaDielectrica().getButton().addActionListener(this);
 
 
 
@@ -151,10 +151,11 @@ public class Controller implements ActionListener{
 			vista.getInicio().setVisible(false);
 			vista.getCampoElectrico().setVisible(true);
 			vista.setContentPane(vista.getCampoElectrico());
-
 		}
 		if(c.equals("BTN_CAMPO_CAPACITANCIA_I")){
-			
+			vista.getInicio().setVisible(false);
+			vista.getCampoElectrico().setVisible(true);
+			vista.setContentPane(vista.getCampoElectrico());
 		}
 
 		if(c.equals("BTN_CAPACITANCIA_I")) {
@@ -907,6 +908,13 @@ public class Controller implements ActionListener{
 
 			vista.exportWindows("Se ha guardado con éxito los datos", "Informacion", 2);
 
+		}
+		if(c.equals("B_VOLVER")) {
+			
+			vista.getInicio().setVisible(true);
+			vista.getCapacitanciaDielectrica().setVisible(false);
+			vista.setContentPane(vista.getInicio());
+			vista.limpiarPanel(vista.getCapacitanciaDielectrica());
 		}
 
 
