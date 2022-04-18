@@ -28,6 +28,7 @@ public class VentanaPrincipal extends JFrame {
 	private EnergiaPotencial energiaPotencial;
 	private Campo2 campo2;
 	private CampoElectrico2 campoElectrico2; 
+	private CapacitanciaDielectrica capacitanciaDielectrica;
 	
 	public VentanaPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./Data/fisica.png"));
@@ -46,6 +47,7 @@ public class VentanaPrincipal extends JFrame {
 		energiaPotencial = new EnergiaPotencial();
 		campo2 = new Campo2();
 		campoElectrico2 = new CampoElectrico2();
+		capacitanciaDielectrica = new CapacitanciaDielectrica();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 520, 440);
@@ -174,6 +176,10 @@ public class VentanaPrincipal extends JFrame {
 
 	public Carga getCarga() {
 		return carga;
+	}
+
+	public CapacitanciaDielectrica getCapacitanciaDielectrica() {
+		return capacitanciaDielectrica;
 	}
 	
 	
