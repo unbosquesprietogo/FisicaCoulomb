@@ -16,6 +16,9 @@ import java.util.Iterator;
 public class VentanaPrincipal extends JFrame {
 
 	private LeyGauss leyGauss;
+	private LeyGaussCilindro leyGaussCilindro;
+	private LeyGaussEsfera leyGaussEsfera;
+	private LeyGaussCuadrado leyGaussCuadrado;
 	private JPanel contentPane;
 	private Inicio inicio;
 	private Anillo anillo;
@@ -48,6 +51,9 @@ public class VentanaPrincipal extends JFrame {
 		campo2 = new Campo2();
 		campoElectrico2 = new CampoElectrico2();
 		leyGauss = new LeyGauss();
+		leyGaussCilindro = new LeyGaussCilindro();
+		leyGaussCuadrado = new LeyGaussCuadrado();
+		leyGaussEsfera = new LeyGaussEsfera();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 520, 440);
@@ -126,6 +132,19 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	
+	
+	public LeyGaussCilindro getLeyGaussCilindro() {
+		return leyGaussCilindro;
+	}
+
+	public LeyGaussEsfera getLeyGaussEsfera() {
+		return leyGaussEsfera;
+	}
+
+	public LeyGaussCuadrado getLeyGaussCuadrado() {
+		return leyGaussCuadrado;
+	}
+
 	public CampoElectrico2 getCampoElectrico2() {
 		return campoElectrico2;
 	}

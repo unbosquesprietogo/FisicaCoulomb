@@ -26,12 +26,12 @@ public class LeyGauss extends JPanel {
 		add(btnEsfera);
 		
 		btnCuadrado = new JButton("Cuadrado");
-		btnEsfera.setActionCommand("LeyGaussCuadrado");
+		btnCuadrado.setActionCommand("LeyGaussCuadrado");
 		btnCuadrado.setBounds(218, 207, 89, 23);
 		add(btnCuadrado);
 		
 		btnCilindro = new JButton("Cilindro");
-		btnEsfera.setActionCommand("LeyGaussCilindro");
+		btnCilindro.setActionCommand("LeyGaussCilindro");
 		btnCilindro.setBounds(341, 207, 89, 23);
 		add(btnCilindro);
 		

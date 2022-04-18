@@ -3,6 +3,7 @@ package co.edu.unbosque.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import co.edu.unbosque.model.Cargas;
+import co.edu.unbosque.model.LeyDeGauss;
 import co.edu.unbosque.model.Potencial_Electrico;
 import co.edu.unbosque.view.VentanaPrincipal;
 
@@ -10,17 +11,19 @@ public class Controller implements ActionListener{
 
 	private Cargas carga;
 	private Potencial_Electrico potencial;
+	private LeyDeGauss leyDeGauss;
 	private VentanaPrincipal vista;
 
 	public Controller() {
 		vista = new VentanaPrincipal();
 		potencial = new Potencial_Electrico();
+		leyDeGauss = new LeyDeGauss();
 		carga = new Cargas();
+
 		oyentes();
 	}
 
 	private void oyentes() {
-
 		vista.getAnillo().getBtnRegresar().addActionListener(this);
 		vista.getAnillo().getBtnResultado().addActionListener(this);
 		vista.getAnillo().getChckbxCarga1().addActionListener(this);
@@ -80,6 +83,20 @@ public class Controller implements ActionListener{
 		vista.getLeyGauss().getBtnCuadrado().addActionListener(this);
 		vista.getLeyGauss().getBtnEsfera().addActionListener(this);
 		vista.getLeyGauss().getBtnRegresar().addActionListener(this);
+		vista.getLeyGaussCilindro().getBtnNewButton_Regresar().addActionListener(this);
+		vista.getLeyGaussCilindro().getBtnNewButton_MostrarResultado().addActionListener(this);
+		vista.getLeyGaussCilindro().getChckbxConDensidadLineal().addActionListener(this);
+		vista.getLeyGaussCilindro().getChckbxSinDensidadLineal().addActionListener(this);
+		vista.getLeyGaussCuadrado().getBtnNewButton_Regresar().addActionListener(this);
+		vista.getLeyGaussCuadrado().getBtnNewButton_MostrarResultado().addActionListener(this);
+		vista.getLeyGaussCuadrado().getChckbxConDensidadSuper().addActionListener(this);
+		vista.getLeyGaussCuadrado().getChckbxSinDensidadSuper().addActionListener(this);
+		vista.getLeyGaussEsfera().getBtnNewButton_Regresar().addActionListener(this);
+		vista.getLeyGaussEsfera().getBtnNewButton_MostrarResultado().addActionListener(this);
+		vista.getLeyGaussEsfera().getChckbxDensidadVolu().addActionListener(this);
+		vista.getLeyGaussEsfera().getChckbxExterna() .addActionListener(this);
+		vista.getLeyGaussEsfera().getChckbxInterna().addActionListener(this);
+		vista.getLeyGaussEsfera().getChckbxSinDensidadVolu().addActionListener(this);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -119,6 +136,31 @@ public class Controller implements ActionListener{
 		}
 		if(c.equals("BTN_LEYGAUSS_I")) {
 			vista.getInicio().setVisible(false);
+			vista.getLeyGauss().setVisible(true);
+			vista.setContentPane(vista.getLeyGauss());
+		}
+		if(c.equals("LeyGaussEsfera")) {
+			vista.getLeyGauss().setVisible(false);
+			vista.getLeyGaussEsfera().setVisible(true);
+			vista.setContentPane(vista.getLeyGaussEsfera());
+		}
+		if(c.equals("LeyGaussCilindro")) {
+			vista.getLeyGauss().setVisible(false);
+			vista.getLeyGaussCilindro().setVisible(true);
+			vista.setContentPane(vista.getLeyGaussCilindro());
+		}
+		if(c.equals("LeyGaussCuadrado")) {
+			vista.getLeyGauss().setVisible(false);
+			vista.getLeyGaussCuadrado().setVisible(true);
+			vista.setContentPane(vista.getLeyGaussCuadrado());
+		}
+		if(c.equals("REGRESAR_INICIO_GAUSS")) {
+			vista.getLeyGaussCilindro().setVisible(false);
+			vista.getLeyGaussEsfera().setVisible(false);
+			vista.getLeyGaussCuadrado().setVisible(false);
+			vista.limpiarPanel(vista.getLeyGaussCilindro());
+			vista.limpiarPanel(vista.getLeyGaussCuadrado());
+			vista.limpiarPanel(vista.getLeyGaussEsfera());
 			vista.getLeyGauss().setVisible(true);
 			vista.setContentPane(vista.getLeyGauss());
 		}
@@ -199,7 +241,6 @@ public class Controller implements ActionListener{
 			vista.setContentPane(vista.getCampoElectrico2());
 			vista.limpiarPanel(vista.getCampo2());
 		}
-		
 		if(c.equals("BTN_REGRESAR_CE2")) {
 			vista.getCampoElectrico().setVisible(true);
 			vista.getCampoElectrico2().setVisible(false);
@@ -472,20 +513,20 @@ public class Controller implements ActionListener{
 
 				double[] posicionInicial = null;
 				try {	
-					
+
 					double[] posiciones = {Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionX().getText())*Math.pow(10,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia().getText()))
 							,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionY().getText())*Math.pow(10,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia().getText()))
 							,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionZ().getText())*Math.pow(10,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia().getText()))};
 					posicionInicial = posiciones;
 
 					double[] posicionFinal = 
-							{Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText())*Math.pow(10,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))
-							,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText())*Math.pow(10,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))
-							,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText())*Math.pow(10,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))};
+						{Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText())*Math.pow(10,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))
+								,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText())*Math.pow(10,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))
+								,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText())*Math.pow(10,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))};
 
 
 					double resultado =0;
-					
+
 					double carga = Double.parseDouble(vista.getEnergiaPotencial().getTextFieldValorCarga().getText())*Math.pow(10,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldNotacionCarga().getText()));
 
 					if(Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionX().getText())==-1) {
@@ -493,7 +534,7 @@ public class Controller implements ActionListener{
 					}else {
 						resultado = potencial.calcularTrabajoCarga(carga,posicionInicial,posicionFinal,true);	
 					}
-					
+
 					if(resultado == (double) -1) {
 						vista.exportWindows("Hubo un error en el procesamiento de datos, retifique nuevamente los datos", "Error", 0);
 					}else {
@@ -509,12 +550,12 @@ public class Controller implements ActionListener{
 			}
 
 		}
-		
+
 		if(c.equals("BTN_AÑADIR_C2")) {
-			
+
 			try {
 				double carga1= Double.parseDouble(vista.getCampo2().getTextCarga().getText());
-				
+
 				double[] coordenadas2= new double[3];
 				double[] coordenadas1= new double[3];
 				coordenadas2[0] = Double.parseDouble(vista.getCampo2().getTextXP().getText());
@@ -524,24 +565,24 @@ public class Controller implements ActionListener{
 				coordenadas1[1] = Double.parseDouble(vista.getCampo2().getTextYC().getText());
 				coordenadas1[2] = Double.parseDouble(vista.getCampo2().getTextZC().getText());
 				int eCarga1= Integer.parseInt(vista.getCampo2().getTextExponenteC().getText());
-				
+
 
 				carga.setCarga1(carga1);
 				carga.setCoordenadas2(coordenadas2);
 				carga.setCoordenadas1(coordenadas1);
-				
+
 
 				carga.agregarCarga(eCarga1);	
 				String data="";
-				
-				
+
+
 				for (int i = 0; i < carga.getCoordenadas().size(); i++) {
 					data += "Carga "+(i+1)+"= "+carga.getCoordenadas().get(i).split(",")[0]+" x10E "+carga.getCoordenadas().get(i).split(",")[1]+"\n"+
 							"x"+(i+1)+"= "+carga.getCoordenadas().get(i).split(",")[2]+"\n"+
 							"y"+(i+1)+"= "+carga.getCoordenadas().get(i).split(",")[3]+"\n"+
 							"z"+(i+1)+"= "+carga.getCoordenadas().get(i).split(",")[4]+"\n"+"\n"
 							;
-					
+
 				}
 				vista.exportWindows(data, "Cargas", 1);
 			}catch(NumberFormatException e1) {
@@ -553,15 +594,115 @@ public class Controller implements ActionListener{
 				vista.getCampo2().getTextZP().setEnabled(false);
 				vista.getCampo2().getBtnResultado().setVisible(true);
 			}
-			
-			
+
+
 		}
 		if(c.equals("BTN_RESULTADO_C2")) {
-			
+
 			vista.getCampo2().getTextCampo().setText(String.valueOf(carga.calcularCampoVectorial()));
 		}
-		
 
+		if(c.equals("CLICK_LEYGAUSSESFERA")) {
+			if(vista.getLeyGaussEsfera().getChckbxExterna().isSelected()) {
+				if(vista.getLeyGaussEsfera().getChckbxSinDensidadVolu().isSelected()) {
+
+					double radioGaussiano = Double.parseDouble(vista.getLeyGaussEsfera().getTextField_RadioGauss().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussEsfera().getTextField_NotacionRadioGauss().getText()));
+					double radio = Double.parseDouble(vista.getLeyGaussEsfera().getTextField_RadioNormal().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussEsfera().getTextField_NotacionRadioNormal().getText()));
+					double carga = Double.parseDouble(vista.getLeyGaussEsfera().getTextField_CargaODensidad().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussEsfera().getTextField_NotacionCargaODensidad().getText()));
+
+					double resultado = leyDeGauss.campoEsferaSinOpcionDensidad(carga, radioGaussiano);
+					vista.getLeyGaussEsfera().getTextField_Resultado().setText(resultado+" C/M³");
+				}else {
+					
+					double radioGaussiano = Double.parseDouble(vista.getLeyGaussEsfera().getTextField_RadioGauss().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussEsfera().getTextField_NotacionRadioGauss().getText()));
+					double radio = Double.parseDouble(vista.getLeyGaussEsfera().getTextField_RadioNormal().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussEsfera().getTextField_NotacionRadioNormal().getText()));
+					double densidad = Double.parseDouble(vista.getLeyGaussEsfera().getTextField_CargaODensidad().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussEsfera().getTextField_NotacionCargaODensidad().getText()));
+
+					double resultado = leyDeGauss.campoEsferaOpcionDensidad(densidad,radioGaussiano,radio,false);
+					vista.getLeyGaussEsfera().getTextField_Resultado().setText(resultado+" C/M³");
+				}
+			}else if(vista.getLeyGaussEsfera().getChckbxInterna().isSelected()) {
+				if(vista.getLeyGaussEsfera().getChckbxSinDensidadVolu().isSelected()) {
+
+					double radioGaussiano = Double.parseDouble(vista.getLeyGaussEsfera().getTextField_RadioGauss().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussEsfera().getTextField_NotacionRadioGauss().getText()));
+					double radio = Double.parseDouble(vista.getLeyGaussEsfera().getTextField_RadioNormal().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussEsfera().getTextField_NotacionRadioNormal().getText()));
+					double carga = Double.parseDouble(vista.getLeyGaussEsfera().getTextField_CargaODensidad().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussEsfera().getTextField_NotacionCargaODensidad().getText()));
+
+					double resultado = leyDeGauss.campoEsferaSinOpcionDensidad(carga, radioGaussiano);
+					vista.getLeyGaussEsfera().getTextField_Resultado().setText(resultado+" C/M³");
+				}else {
+					
+					double radioGaussiano = Double.parseDouble(vista.getLeyGaussEsfera().getTextField_RadioGauss().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussEsfera().getTextField_NotacionRadioGauss().getText()));
+					double densidad = Double.parseDouble(vista.getLeyGaussEsfera().getTextField_CargaODensidad().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussEsfera().getTextField_NotacionCargaODensidad().getText()));
+					double resultado = leyDeGauss.campoEsferaOpcionDensidad(densidad,0,radioGaussiano,true);
+					vista.getLeyGaussEsfera().getTextField_Resultado().setText(resultado+" C/M³");
+				}
+			} else {
+				vista.exportWindows("Seleccione una opción valida", "Error", 0);
+			}
+		}
+		
+		if(c.equals("CLICK_LEYGAUSSCUADRADO")) {
+			if(vista.getLeyGaussCuadrado().getChckbxConDensidadSuper().isSelected()) {
+				double densidad = Double.parseDouble(vista.getLeyGaussCuadrado().getTextField_CargaODensidad().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussCuadrado().getTextField_NotacionCargaODensidad().getText()));
+				double resultado = leyDeGauss.campoCuadradoOpcionDensidad(densidad);
+				vista.getLeyGaussEsfera().getTextField_Resultado().setText(resultado+" C/M²");
+			}else if(vista.getLeyGaussCuadrado().getChckbxSinDensidadSuper().isSelected()) {
+				double longitud = Double.parseDouble(vista.getLeyGaussCuadrado().getTextField_Longitud().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussCuadrado().getTextField_NotacionLongitud().getText()));
+				double carga = Double.parseDouble(vista.getLeyGaussCuadrado().getTextField_CargaODensidad().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussCuadrado().getTextField_NotacionCargaODensidad().getText()));
+				double resultado = leyDeGauss.campoCuadradoSinDensidad(carga,longitud);
+				vista.getLeyGaussEsfera().getTextField_Resultado().setText(resultado+" C/M²");
+			}else {
+				vista.exportWindows("Seleccione una opción valida", "Error", 0);
+			}
+		}
+
+		if(c.equals("CLICK_LEYGAUSSCILINDRO")) {
+			if(vista.getLeyGaussCilindro().getChckbxConDensidadLineal().isSelected()) {
+				double densidad = Double.parseDouble(vista.getLeyGaussCilindro().getTextField_CargaODensidad().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussCilindro().getTextField_NotacionCargaODensidad().getText()));
+				double radio = Double.parseDouble(vista.getLeyGaussCilindro().getTextField_RadioGauss().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussCilindro().getTextField_NotacionRadioGauss().getText()));
+				double resultado = leyDeGauss.campoCilindroOpcionDensidad(densidad,radio);
+				vista.getLeyGaussEsfera().getTextField_Resultado().setText(resultado+" C/M");
+			}else if(vista.getLeyGaussCilindro().getChckbxConDensidadLineal().isSelected()) {
+				double carga = Double.parseDouble(vista.getLeyGaussCilindro().getTextField_CargaODensidad().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussCilindro().getTextField_NotacionCargaODensidad().getText()));
+				double radio = Double.parseDouble(vista.getLeyGaussCilindro().getTextField_RadioGauss().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussCilindro().getTextField_NotacionRadioGauss().getText()));
+				double longitud = Double.parseDouble(vista.getLeyGaussCilindro().getTextField_Longitud().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussCilindro().getTextField_NotacionLongitud().getText()));
+				double resultado = leyDeGauss.campoCilindroOpcionSinDensidad(carga,radio,longitud);
+				vista.getLeyGaussEsfera().getTextField_Resultado().setText(resultado+" C/M");
+			}else {
+				vista.exportWindows("Seleccione una opción valida", "Error", 0);
+			}
+		}
+		
+		if(vista.getLeyGaussEsfera().getChckbxSinDensidadVolu().isSelected()) {
+			vista.getLeyGaussEsfera().getLblNewLabel_CargaODensidad().setText("Q =");
+			vista.getLeyGaussEsfera().getLblNewLabel_UnidadesCargaODensidad().setText("C/M³");			
+		}else {
+			vista.getLeyGaussEsfera().getLblNewLabel_CargaODensidad().setText("P =");
+			vista.getLeyGaussEsfera().getLblNewLabel_UnidadesCargaODensidad().setText("C/M³");
+		}
+
+
+
+		if(vista.getLeyGaussCuadrado().getChckbxSinDensidadSuper().isSelected()) {
+			vista.getLeyGaussCuadrado().getLblNewLabel_CargaODensidad().setText("Q =");
+			vista.getLeyGaussCuadrado().getLblNewLabel_UnidadesCargaODensidad().setText("C/M²");			
+		}else {
+			vista.getLeyGaussCuadrado().getLblNewLabel_CargaODensidad().setText("Sigma=");
+			vista.getLeyGaussCuadrado().getLblNewLabel_UnidadesCargaODensidad().setText("C/M²");
+		}
+
+
+
+		if(vista.getLeyGaussCilindro().getChckbxSinDensidadLineal().isSelected()) {
+			vista.getLeyGaussCilindro().getLblNewLabel_CargaODensidad().setText("Q =");
+			vista.getLeyGaussCilindro().getLblNewLabel_UnidadesCargaODensidad().setText("C/M");	
+			vista.getLeyGaussCilindro().getTextField_Longitud().setEditable(true);
+		}else {
+			vista.getLeyGaussCilindro().getLblNewLabel_CargaODensidad().setText("lambda =");
+			vista.getLeyGaussCilindro().getLblNewLabel_UnidadesCargaODensidad().setText("C/M");	
+			vista.getLeyGaussCilindro().getTextField_Longitud().setEditable(false);
+		}
 
 	}
 
