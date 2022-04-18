@@ -61,7 +61,7 @@ public class Paneles extends JPanel {
 		contentPane.add(rdbtnNewRadioButton_1);
 		
 		Panel1 = new Panel1();
-		Panel1.setBounds(50, 185, 116, -135);
+		Panel1.setBounds(10, 121, Panel1.getWidth(), Panel1.getHeight());
 		contentPane.add(Panel1);
 		
 	}

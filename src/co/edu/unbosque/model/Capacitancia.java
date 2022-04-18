@@ -2,13 +2,15 @@ package co.edu.unbosque.model;
 
 public class Capacitancia {
 	
+	private double capacitor[];
+	private double capacitor_NC[][];
 	private double carga;
 	private double voltaje;
-	private double epsilon;
+	private double epsilon = 0.00000000000885;
 	private double distancia, longi;
 	private double area;
 	private double rad1, rad2;
-	
+	private int cantcap;
 	
 	public double capacitanciaPlacas1(double carga, double voltaje){
 		
@@ -32,6 +34,44 @@ public class Capacitancia {
 		
 		return (((4*Math.PI)*epsilon)*((rad1*rad2)/(rad2-rad1)));
 		
+	}
+	
+	public double capacitanciaSerie(int cantcap, double[] capacitor) {
+		double res = 0.0;
+		double res1 = 0.0;
+		for(int i = 0;i<cantcap;i++) {
+			
+			res = 1/capacitor[i]; 
+			res1 = res+res;
+			
+		}
+		return res1;
+	}
+	
+	public double capacitanciaParalelo(int cantcap, double capacitor[]) {
+		double res = 0.0;
+		double res1 = 0.0;
+		for(int i = 0;i<cantcap;i++) {
+			res = capacitor[i];
+			res1 = res+res;
+		}
+		return res1;
+	}
+
+	public double[] getCapacitor() {
+		return capacitor;
+	}
+
+	public void setCapacitor(double[] capacitor) {
+		this.capacitor = capacitor;
+	}
+
+	public double[][] getCapacitor_NC() {
+		return capacitor_NC;
+	}
+
+	public void setCapacitor_NC(double[][] capacitor_NC) {
+		this.capacitor_NC = capacitor_NC;
 	}
 
 	public double getCarga() {
@@ -66,20 +106,20 @@ public class Capacitancia {
 		this.distancia = distancia;
 	}
 
-	public double getArea() {
-		return area;
-	}
-
-	public void setArea(double area) {
-		this.area = area;
-	}
-
 	public double getLongi() {
 		return longi;
 	}
 
 	public void setLongi(double longi) {
 		this.longi = longi;
+	}
+
+	public double getArea() {
+		return area;
+	}
+
+	public void setArea(double area) {
+		this.area = area;
 	}
 
 	public double getRad1() {
@@ -96,6 +136,14 @@ public class Capacitancia {
 
 	public void setRad2(double rad2) {
 		this.rad2 = rad2;
+	}
+
+	public int getCantcap() {
+		return cantcap;
+	}
+
+	public void setCantcap(int cantcap) {
+		this.cantcap = cantcap;
 	}
 
 }
