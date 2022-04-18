@@ -35,6 +35,11 @@ public class EnergiaPotencial extends JPanel {
 	private JTextField textFieldNotacionCargaDistancia1;
 	private JLabel lblDistanciaNotacion_1;
 	private JTextField textFieldNotacionCargaDistancia;
+	private JLabel lblm;
+	private JLabel lblM;
+	private JLabel lblm_2;
+	private JLabel lblm_3;
+	private JLabel lblC;
 
 	/**
 	 * Create the panel.
@@ -176,7 +181,7 @@ public class EnergiaPotencial extends JPanel {
 		textFieldResultados.setColumns(10);
 		
 		textFieldNotacionCargaDistancia1 = new JTextField();
-		textFieldNotacionCargaDistancia1.setBounds(380, 251, 86, 20);
+		textFieldNotacionCargaDistancia1.setBounds(380, 251, 50, 20);
 		add(textFieldNotacionCargaDistancia1);
 		textFieldNotacionCargaDistancia1.setColumns(10);
 		
@@ -190,8 +195,33 @@ public class EnergiaPotencial extends JPanel {
 		
 		textFieldNotacionCargaDistancia = new JTextField();
 		textFieldNotacionCargaDistancia.setColumns(10);
-		textFieldNotacionCargaDistancia.setBounds(380, 195, 86, 20);
+		textFieldNotacionCargaDistancia.setBounds(380, 195, 50, 20);
 		add(textFieldNotacionCargaDistancia);
+		
+		lblm = new JLabel(") m");
+		lblm.setFont(new Font("Franklin Gothic Demi", Font.PLAIN, 15));
+		lblm.setBounds(434, 255, 46, 14);
+		add(lblm);
+		
+		lblM = new JLabel(") m");
+		lblM.setFont(new Font("Franklin Gothic Demi", Font.PLAIN, 15));
+		lblM.setBounds(434, 198, 46, 14);
+		add(lblM);
+		
+		lblm_2 = new JLabel("(");
+		lblm_2.setFont(new Font("Franklin Gothic Demi", Font.PLAIN, 15));
+		lblm_2.setBounds(109, 197, 17, 14);
+		add(lblm_2);
+		
+		lblm_3 = new JLabel("(");
+		lblm_3.setFont(new Font("Franklin Gothic Demi", Font.PLAIN, 15));
+		lblm_3.setBounds(109, 254, 17, 14);
+		add(lblm_3);
+		
+		lblC = new JLabel("C");
+		lblC.setFont(new Font("Franklin Gothic Demi", Font.PLAIN, 15));
+		lblC.setBounds(378, 226, 46, 14);
+		add(lblC);
 		
 	}
 

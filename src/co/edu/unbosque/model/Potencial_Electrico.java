@@ -2,7 +2,7 @@ package co.edu.unbosque.model;
 
 public class Potencial_Electrico {
 	private double[] cargas;
-	private int[][] cargas_Notacion;
+	private double[][] cargas_Notacion;
 	private double[][] posiciones;
 	private int notacionCientificaDistancia =0;
 	private long k = (long) (9*Math.pow(10,9));
@@ -82,7 +82,7 @@ public class Potencial_Electrico {
 
 	public void generarCantidadCargasPosiciones(int cantidadCargas){
 		cargas = new double[cantidadCargas];
-		cargas_Notacion = new int[2][cantidadCargas];
+		cargas_Notacion = new double[2][cantidadCargas];
 		posiciones = new double[3][cantidadCargas];
 	}
 	
@@ -90,7 +90,7 @@ public class Potencial_Electrico {
 		return posiciones;
 	}
 	
-	public int[][] getCargas_Notacion() {
+	public double[][] getCargas_Notacion() {
 		return cargas_Notacion;
 	}
 

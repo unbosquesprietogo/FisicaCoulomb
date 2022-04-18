@@ -15,6 +15,7 @@ import java.util.Iterator;
 
 public class VentanaPrincipal extends JFrame {
 
+	private LeyGauss leyGauss;
 	private JPanel contentPane;
 	private Inicio inicio;
 	private Anillo anillo;
@@ -42,6 +43,7 @@ public class VentanaPrincipal extends JFrame {
 		leyCoulomb =new LeyCoulomb();
 		varilla= new Varilla();
 		energiaPotencial = new EnergiaPotencial();
+		leyGauss = new LeyGauss();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 520, 440);
@@ -162,6 +164,11 @@ public class VentanaPrincipal extends JFrame {
 	public Carga getCarga() {
 		return carga;
 	}
+
+	public LeyGauss getLeyGauss() {
+		return leyGauss;
+	}
+	
 	
 	
 

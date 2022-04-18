@@ -18,6 +18,7 @@ public class Inicio extends JPanel {
 	private JLabel lblNombres;
 	private JButton btnCampo;
 	private JButton btnCargas;
+	private JButton btnLeyGauss;
 	private JButton btnPotencial;
 	private JLabel tittleLbl;
 	private ImageIcon img;
@@ -46,6 +47,12 @@ public class Inicio extends JPanel {
 		btnCampo.setBounds(240, 293, 135, 40);
 		btnCampo.setActionCommand("BTN_CAMPO_I");
 		add(btnCampo);
+		
+		btnLeyGauss = new JButton("Ley Gauss");
+		btnLeyGauss.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
+		btnLeyGauss.setBounds(240, 340, 135, 40);
+		btnLeyGauss.setActionCommand("BTN_LEYGAUSS_I");
+		add(btnLeyGauss);
 
 		btnPotencial = new JButton("Energía Potencial");
 		btnPotencial.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
@@ -65,6 +72,14 @@ public class Inicio extends JPanel {
 		add(lblImage);	
 
 	}
+
+	
+	
+	public JButton getBtnLeyGauss() {
+		return btnLeyGauss;
+	}
+
+
 
 	public JLabel getLblImage() {
 		return lblImage;
