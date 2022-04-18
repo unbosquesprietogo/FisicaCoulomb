@@ -18,7 +18,7 @@ public class Panel2 extends JPanel {
 	 */
 	public Panel2() {
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 121, 504, 268);
+		panel.setBounds(10, 121, 458, 283);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("Epsilon");
