@@ -149,7 +149,7 @@ public class Controller implements ActionListener{
 		if(c.equals("BTN_POTENCIAL_I")) {
 			int cantCargas = Integer.parseInt(vista.inputWindows("¿Cuantas cargas cuenta el sistema?", "# Cargas", 1));
 			potencial.generarCantidadCargasPosiciones(cantCargas);
-
+			
 			vista.getEnergiaPotencial().getList().addItem("");
 			for (int i = 0; i < cantCargas; i++) {
 				vista.getEnergiaPotencial().getList().addItem(i+1);
@@ -921,7 +921,7 @@ public class Controller implements ActionListener{
 
 		}
 
-		if(c.equals("CARGA_LIST")) {
+		if(c.equals("CARGA_CAPACITOR_LIST")) {
 			int numeroCarga = (int) vista.getCapacitoresCircuitos().getListCargasCircuitos().getSelectedItem();
 			
 			vista.getCapacitoresCircuitos().getTextField().setText(capacitancia.getCapacitor_NC()[0][numeroCarga-1]+"");

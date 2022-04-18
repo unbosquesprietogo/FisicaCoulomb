@@ -22,7 +22,7 @@ public class EnergiaPotencial extends JPanel {
 	private JTextField textFieldPosicionZ1;
 	private JButton btnSetCarga;
 	private JButton btnCalcularPotencial;
-	private JComboBox<Integer> list;
+	private JComboBox<String> list;
 	private JTextField textFieldPosicionX;
 	private JTextField textFieldPosicionY;
 	private JTextField textFieldPosicionZ;
@@ -227,7 +227,7 @@ public class EnergiaPotencial extends JPanel {
 
 	public void agregarItems(int[] array) {
 		for(int i=0;i<array.length;i++) {
-		list.addItem(array[i]);
+		list.addItem(array[i]+"");
 		}
 	}
 	

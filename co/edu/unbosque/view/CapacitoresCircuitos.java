@@ -34,7 +34,7 @@ public class CapacitoresCircuitos extends JPanel {
 		add(lblTitulo);
 		
 		listCargasCircuitos = new JComboBox<Integer>();
-		listCargasCircuitos.setActionCommand("CARGA_LIST");
+		listCargasCircuitos.setActionCommand("CARGA_CAPACITOR_LIST");
 		listCargasCircuitos.setBounds(121, 112, 73, 22);
 		add(listCargasCircuitos);
 		
