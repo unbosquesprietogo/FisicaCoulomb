@@ -84,6 +84,7 @@ public class LeyCoulomb extends JPanel {
 		add(lblDistancia);
 		
 		btnRegresar = new JButton("Regresar");
+		btnRegresar.setActionCommand("BTN_REGRESAR_LC");
 		btnRegresar.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
 		btnRegresar.setBounds(0, 0, 91, 23);
 		btnRegresar.setActionCommand("BTN_REGRESAR_LC");
