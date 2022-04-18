@@ -23,6 +23,8 @@ public class Inicio extends JPanel {
 	private JLabel tittleLbl;
 	private ImageIcon img;
 	private JButton btnCapacitancia;
+	private JButton btnCircuitosCapacitores;
+	private JButton btnCampoCapacitancia;
 
 	/**
 	 * Create the panel.
@@ -54,6 +56,12 @@ public class Inicio extends JPanel {
 		btnLeyGauss.setBounds(280, 335, 135, 40);
 		btnLeyGauss.setActionCommand("BTN_LEYGAUSS_I");
 		add(btnLeyGauss);
+		
+		btnCircuitosCapacitores = new JButton("Circuitos Capac.");
+		btnCircuitosCapacitores.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
+		btnCircuitosCapacitores.setBounds(10, 335, 135, 40);
+		btnCircuitosCapacitores.setActionCommand("BTN_CIRCUITOS_I");
+		add(btnCircuitosCapacitores);
 
 		btnPotencial = new JButton("Energía Potencial");
 		btnPotencial.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
@@ -77,8 +85,24 @@ public class Inicio extends JPanel {
 		btnCapacitancia.setActionCommand("BTN_CAPACITANCIA_I");
 		btnCapacitancia.setBounds(129, 335, 135, 40);
 		add(btnCapacitancia);
+		
+		btnCampoCapacitancia = new JButton("Campo E. Capacitancia");
+		btnCampoCapacitancia .setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
+		btnCampoCapacitancia .setActionCommand("BTN_CAMPO_CAPACITANCIA_I");
+		btnCampoCapacitancia .setBounds(42, 250, 148, 40);
+		add(btnCampoCapacitancia );
+
 
 	}
+	
+	public JButton getBtnCampoCapacitancia() {
+		return btnCampoCapacitancia;
+	}
+
+	public JButton getBtnCircuitosCapacitores() {
+		return btnCircuitosCapacitores;
+	}
+
 	public JButton getBtnLeyGauss() {
 		return btnLeyGauss;
 	}

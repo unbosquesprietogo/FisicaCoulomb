@@ -16,6 +16,7 @@ import java.util.Iterator;
 public class VentanaPrincipal extends JFrame {
 
 	private LeyGauss leyGauss;
+	private CapacitoresCircuitos capacitoresCircuitos;
 	private LeyGaussCilindro leyGaussCilindro;
 	private LeyGaussEsfera leyGaussEsfera;
 	private LeyGaussCuadrado leyGaussCuadrado;
@@ -56,6 +57,7 @@ public class VentanaPrincipal extends JFrame {
 		leyGaussCuadrado = new LeyGaussCuadrado();
 		leyGaussEsfera = new LeyGaussEsfera();
 		capacitanciaDielectrica = new CapacitanciaDielectrica();
+		capacitoresCircuitos = new CapacitoresCircuitos();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 520, 440);
 		contentPane = new JPanel();
@@ -108,6 +110,13 @@ public class VentanaPrincipal extends JFrame {
 		energiaPotencial.getChckbxPotencialPunto().setSelected(false);
 		energiaPotencial.getChckbxTrabajoCarga().setSelected(false);
 		}
+		
+		if(panel == capacitoresCircuitos) {
+			capacitoresCircuitos.getListCargasCircuitos().removeAllItems();
+			capacitoresCircuitos.getChckbxCircuitoParalelo().setSelected(false);
+			capacitoresCircuitos.getChckbxCircuitoSerie().setSelected(false);
+			}
+		
 		for(Object o : panel.getComponents()) {
 			if (o instanceof JTextField) {
 				((JTextField) o).setText(null);
@@ -134,6 +143,10 @@ public class VentanaPrincipal extends JFrame {
 
 	
 	
+	public CapacitoresCircuitos getCapacitoresCircuitos() {
+		return capacitoresCircuitos;
+	}
+
 	public LeyGaussCilindro getLeyGaussCilindro() {
 		return leyGaussCilindro;
 	}
