@@ -58,7 +58,6 @@ public class Controller implements ActionListener{
 		vista.getInicio().getBtnPotencial().addActionListener(this);
 		vista.getInicio().getBtnLeyGauss().addActionListener(this);
 		vista.getInicio().getBtnCapacitancia().addActionListener(this);
-		vista.getInicio().getBtnCircuitosCapacitores().addActionListener(this);
 
 		vista.getLeyCoulomb().getBtnCarga().addActionListener(this);
 		vista.getLeyCoulomb().getBtnDistancia().addActionListener(this);
@@ -111,8 +110,10 @@ public class Controller implements ActionListener{
 		vista.getCapacitanciaDielectrica().getBtnPermitividad().addActionListener(this);
 		vista.getCapacitanciaDielectrica().getButton().addActionListener(this);
 
-
-
+		vista.getCapacitanciaInicial().getBtnCampoElectrico().addActionListener(this);
+		vista.getCapacitanciaInicial().getBtnCircuito().addActionListener(this);
+		vista.getCapacitanciaInicial().getBtnDielectrica().addActionListener(this);
+		vista.getCapacitanciaInicial().getBtnRegresar().addActionListener(this);
 
 	}
 	@Override
@@ -152,18 +153,12 @@ public class Controller implements ActionListener{
 			vista.getCampoElectrico().setVisible(true);
 			vista.setContentPane(vista.getCampoElectrico());
 		}
-		if(c.equals("BTN_CAMPO_CAPACITANCIA_I")){
+		if(c.equals("BTN_CAPACITANCIA_I")){
 			vista.getInicio().setVisible(false);
-			vista.getCampoElectrico().setVisible(true);
-			vista.setContentPane(vista.getCampoElectrico());
+			vista.getCapacitanciaInicial().setVisible(true);
+			vista.setContentPane(vista.getCapacitanciaInicial());
 		}
 
-		if(c.equals("BTN_CAPACITANCIA_I")) {
-			vista.getInicio().setVisible(false);
-			vista.getCapacitanciaDielectrica().setVisible(true);
-			vista.setContentPane(vista.getCapacitanciaDielectrica());
-
-		}
 		if(c.equals("BTN_REGRESAR_CE")) {
 			vista.getInicio().setVisible(true);
 			vista.getCampoElectrico().setVisible(false);
@@ -297,6 +292,9 @@ public class Controller implements ActionListener{
 			vista.getVarilla().setVisible(true);
 			vista.setContentPane(vista.getVarilla());
 		}
+
+
+
 		if(c.equals("BTN_REGRESAR_V")) {
 			vista.getCampoElectrico().setVisible(true);
 			vista.getVarilla().setVisible(false);
@@ -833,6 +831,8 @@ public class Controller implements ActionListener{
 			}
 		}
 
+
+
 		if(c.equals("CLICK_LEYGAUSSCILINDRO")) {
 			if(vista.getLeyGaussCilindro().getChckbxConDensidadLineal().isSelected()) {
 				double densidad = Double.parseDouble(vista.getLeyGaussCilindro().getTextField_CargaODensidad().getText())*Math.pow(10, Integer.parseInt(vista.getLeyGaussCilindro().getTextField_NotacionCargaODensidad().getText()));
@@ -909,13 +909,43 @@ public class Controller implements ActionListener{
 			vista.exportWindows("Se ha guardado con éxito los datos", "Informacion", 2);
 
 		}
-		if(c.equals("B_VOLVER")) {
-			
+		if(c.equals("BTN_REGRESAR_CAPA")) {
+
 			vista.getInicio().setVisible(true);
-			vista.getCapacitanciaDielectrica().setVisible(false);
+			vista.getCapacitanciaInicial().setVisible(false);
 			vista.setContentPane(vista.getInicio());
+			vista.limpiarPanel(vista.getCapacitanciaInicial());
+		}
+
+		if(c.equals("BTN_CAMPO_CAPA")) {
+
+			vista.getCapacitancia().setVisible(true);
+			vista.getCapacitanciaInicial().setVisible(false);
+			vista.setContentPane(vista.getCapacitancia());
+			vista.limpiarPanel(vista.getCapacitanciaInicial());
+		}
+		if(c.equals("BTN_CIRCUITO_CAPA")) {
+
+			vista.getCapacitoresCircuitos().setVisible(true);
+			vista.getCapacitanciaInicial().setVisible(false);
+			vista.setContentPane(vista.getCapacitoresCircuitos());
+			vista.limpiarPanel(vista.getCapacitanciaInicial());
+		}
+		if(c.equals("BTN_DIELECTRICA_CAPA")) {
+
+			vista.getCapacitanciaDielectrica().setVisible(true);
+			vista.getCapacitanciaInicial().setVisible(false);
+			vista.setContentPane(vista.getCapacitanciaDielectrica());
+			vista.limpiarPanel(vista.getCapacitanciaInicial());
+		}
+		
+		if(c.equals("B_VOLVER")) {
+			vista.getCapacitanciaInicial().setVisible(true);
+			vista.getCapacitanciaDielectrica().setVisible(false);
+			vista.setContentPane(vista.getCapacitanciaInicial());
 			vista.limpiarPanel(vista.getCapacitanciaDielectrica());
 		}
+
 
 
 	}

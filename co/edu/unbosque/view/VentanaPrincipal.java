@@ -16,6 +16,7 @@ import java.util.Iterator;
 public class VentanaPrincipal extends JFrame {
 
 	private LeyGauss leyGauss;
+	private CapacitanciaInicial capacitanciaInicial;
 	private CapacitoresCircuitos capacitoresCircuitos;
 	private LeyGaussCilindro leyGaussCilindro;
 	private LeyGaussEsfera leyGaussEsfera;
@@ -34,6 +35,7 @@ public class VentanaPrincipal extends JFrame {
 	private Campo2 campo2;
 	private CampoElectrico2 campoElectrico2; 
 	private CapacitanciaDielectrica capacitanciaDielectrica;
+	private Capacitancia capacitancia;
 	
 	public VentanaPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./Data/fisica.png"));
@@ -43,6 +45,7 @@ public class VentanaPrincipal extends JFrame {
 		inicio = new Inicio();
 		anillo = new Anillo();
 		campo = new Campo();
+		capacitanciaInicial = new CapacitanciaInicial();
 		campoElectrico = new CampoElectrico();
 		carga = new Carga();
 		distancia = new Distancia();
@@ -58,6 +61,7 @@ public class VentanaPrincipal extends JFrame {
 		leyGaussEsfera = new LeyGaussEsfera();
 		capacitanciaDielectrica = new CapacitanciaDielectrica();
 		capacitoresCircuitos = new CapacitoresCircuitos();
+		capacitancia = new Capacitancia();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 520, 440);
 		contentPane = new JPanel();
@@ -143,6 +147,10 @@ public class VentanaPrincipal extends JFrame {
 
 	
 	
+	public CapacitanciaInicial getCapacitanciaInicial() {
+		return capacitanciaInicial;
+	}
+
 	public CapacitoresCircuitos getCapacitoresCircuitos() {
 		return capacitoresCircuitos;
 	}
@@ -177,6 +185,11 @@ public class VentanaPrincipal extends JFrame {
 
 	public Anillo getAnillo() {
 		return anillo;
+	}
+	
+
+	public Capacitancia getCapacitancia() {
+		return capacitancia;
 	}
 
 	public Campo getCampo() {
