@@ -55,7 +55,10 @@ public class Controller implements ActionListener{
 		vista.getInicio().getBtnCampo().addActionListener(this);
 		vista.getInicio().getBtnCargas().addActionListener(this);
 		vista.getInicio().getBtnPotencial().addActionListener(this);
+
 		vista.getInicio().getBtnLeyGauss().addActionListener(this);
+		vista.getInicio().getBtnCapacitancia().addActionListener(this);
+
 		vista.getLeyCoulomb().getBtnCarga().addActionListener(this);
 		vista.getLeyCoulomb().getBtnDistancia().addActionListener(this);
 		vista.getLeyCoulomb().getBtnFuerza().addActionListener(this);
@@ -79,10 +82,12 @@ public class Controller implements ActionListener{
 		vista.getCampoElectrico2().getbtnCoordenadas().addActionListener(this);
 		vista.getCampoElectrico2().getbtnDistancia().addActionListener(this);
 		vista.getCampoElectrico2().getBtnRegresar().addActionListener(this);
+
 		vista.getLeyGauss().getBtnCilindro().addActionListener(this);
 		vista.getLeyGauss().getBtnCuadrado().addActionListener(this);
 		vista.getLeyGauss().getBtnEsfera().addActionListener(this);
 		vista.getLeyGauss().getBtnRegresar().addActionListener(this);
+
 		vista.getLeyGaussCilindro().getBtnNewButton_Regresar().addActionListener(this);
 		vista.getLeyGaussCilindro().getBtnNewButton_MostrarResultado().addActionListener(this);
 		vista.getLeyGaussCilindro().getChckbxConDensidadLineal().addActionListener(this);
@@ -97,6 +102,16 @@ public class Controller implements ActionListener{
 		vista.getLeyGaussEsfera().getChckbxExterna() .addActionListener(this);
 		vista.getLeyGaussEsfera().getChckbxInterna().addActionListener(this);
 		vista.getLeyGaussEsfera().getChckbxSinDensidadVolu().addActionListener(this);
+		vista.getCapacitanciaDielectrica().getBtnCampo().addActionListener(this);
+		vista.getCapacitanciaDielectrica().getBtnCapacitancia().addActionListener(this);
+		vista.getCapacitanciaDielectrica().getBtnConstante().addActionListener(this);
+		vista.getCapacitanciaDielectrica().getBtnDensidadCarga().addActionListener(this);
+		vista.getCapacitanciaDielectrica().getBtnDensidadEnergia().addActionListener(this);
+		vista.getCapacitanciaDielectrica().getBtnPermitividad().addActionListener(this);
+
+
+
+
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -121,6 +136,13 @@ public class Controller implements ActionListener{
 			vista.getInicio().setVisible(false);
 			vista.getCampoElectrico().setVisible(true);
 			vista.setContentPane(vista.getCampoElectrico());
+
+		}
+
+		if(c.equals("BTN_CAPACITANCIA_I")) {
+			vista.getInicio().setVisible(false);
+			vista.getCapacitanciaDielectrica().setVisible(true);
+			vista.setContentPane(vista.getCapacitanciaDielectrica());
 
 		}
 		if(c.equals("BTN_REGRESAR_CE")) {
@@ -241,6 +263,7 @@ public class Controller implements ActionListener{
 			vista.setContentPane(vista.getCampoElectrico2());
 			vista.limpiarPanel(vista.getCampo2());
 		}
+
 		if(c.equals("BTN_REGRESAR_CE2")) {
 			vista.getCampoElectrico().setVisible(true);
 			vista.getCampoElectrico2().setVisible(false);
@@ -529,17 +552,34 @@ public class Controller implements ActionListener{
 
 					double carga = Double.parseDouble(vista.getEnergiaPotencial().getTextFieldValorCarga().getText())*Math.pow(10,Double.parseDouble(vista.getEnergiaPotencial().getTextFieldNotacionCarga().getText()));
 
+
+					double[] posicioness = {Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia().getText()))
+							,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia().getText()))
+							,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia().getText()))};
+					posicionInicial = posicioness;
+
+					double[] posicionFinall = 
+						{Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionX1().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))
+								,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionY1().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))
+								,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldPosicionZ1().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCargaDistancia1().getText()))};
+
+
+					double resultadoo =0;
+
+					double cargaa = Integer.parseInt(vista.getEnergiaPotencial().getTextFieldValorCarga().getText())*Math.pow(10,Integer.parseInt(vista.getEnergiaPotencial().getTextFieldNotacionCarga().getText()));
+
+
 					if(Double.parseDouble(vista.getEnergiaPotencial().getTextFieldPosicionX().getText())==-1) {
-						resultado = potencial.calcularTrabajoCarga(carga,posicionInicial,posicionFinal,false);
+						resultadoo = potencial.calcularTrabajoCarga(cargaa,posicionInicial,posicionFinall,false);
 					}else {
-						resultado = potencial.calcularTrabajoCarga(carga,posicionInicial,posicionFinal,true);	
+						resultadoo = potencial.calcularTrabajoCarga(cargaa,posicionInicial,posicionFinall,true);	
 					}
 
-					if(resultado == (double) -1) {
+					if(resultadoo == (double) -1) {
 						vista.exportWindows("Hubo un error en el procesamiento de datos, retifique nuevamente los datos", "Error", 0);
 					}else {
 
-						vista.getEnergiaPotencial().getTextFieldResultados().setText(resultado+" J");
+						vista.getEnergiaPotencial().getTextFieldResultados().setText(resultadoo+" J");
 					}
 				}catch(Exception sinInicial) {
 					vista.exportWindows("Cometió algun error en la digitación, vuelva a intentarlo", "Error", 0);
@@ -601,6 +641,119 @@ public class Controller implements ActionListener{
 
 			vista.getCampo2().getTextCampo().setText(String.valueOf(carga.calcularCampoVectorial()));
 		}
+
+
+		if(c.equals("B_CAPACITANCIA")) {
+
+			try {
+
+				double co = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextCCo().getText()) ;
+				double k = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextCK().getText());
+				double eCo = Integer.parseInt(vista.getCapacitanciaDielectrica().getTextECCo().getText());
+				double eK = Integer.parseInt(vista.getCapacitanciaDielectrica().getTextECK().getText());
+
+				double resultado = (co*Math.pow(10, eCo))*(k*Math.pow(10, eK));
+
+				vista.getCapacitanciaDielectrica().getTextC().setText(String.valueOf(resultado));
+
+
+			}catch (NumberFormatException e2) {
+				vista.exportWindows("ERROR EN LOS DATOS.\nINGRESELOS NUEVAMENTE\n(Recuerde usar puntos para cifras decimales).", "ERROR", 0);
+			}
+		}
+
+		if(c.equals("B_CONSTANTE")) {
+
+			try {
+
+				double co = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextKCo().getText()) ;
+				double ca = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextKC().getText());
+				double eCo = Integer.parseInt(vista.getCapacitanciaDielectrica().getTextEKCo().getText());
+				double eCa = Integer.parseInt(vista.getCapacitanciaDielectrica().getTextEKC().getText());
+
+				double resultado = (ca*Math.pow(10, eCa))/(co*Math.pow(10, eCo));
+
+				vista.getCapacitanciaDielectrica().getTextK().setText(String.valueOf(resultado));
+
+
+			}catch (NumberFormatException e2) {
+				vista.exportWindows("ERROR EN LOS DATOS.\nINGRESELOS NUEVAMENTE\n(Recuerde usar puntos para cifras decimales).", "ERROR", 0);
+			}
+		}
+		if(c.equals("B_CAMPO")) {
+
+			try {
+
+				double eo = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextEEo().getText()) ;
+				double k = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextEK().getText());
+				double eEo = Integer.parseInt(vista.getCapacitanciaDielectrica().getTextEEo().getText());
+				double eK = Integer.parseInt(vista.getCapacitanciaDielectrica().getTextEEK().getText());
+
+				double resultado = (eo*Math.pow(10, eEo))*(k*Math.pow(10, eK));
+
+				vista.getCapacitanciaDielectrica().getTextE().setText(String.valueOf(resultado));
+
+
+			}catch (NumberFormatException e2) {
+				vista.exportWindows("ERROR EN LOS DATOS.\nINGRESELOS NUEVAMENTE\n(Recuerde usar puntos para cifras decimales).", "ERROR", 0);
+			}
+		}
+		if(c.equals("B_PERMITIVIDAD")) {
+
+			try {
+
+				double eo = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextEpEpo().getText()) ;
+				double k = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextEpK().getText());
+				double eEo = Integer.parseInt(vista.getCapacitanciaDielectrica().getTextEEpEpo().getText());
+				double eK = Integer.parseInt(vista.getCapacitanciaDielectrica().getTextEEpK().getText());
+
+				double resultado = (eo*Math.pow(10, eEo))*(k*Math.pow(10, eK));
+
+				vista.getCapacitanciaDielectrica().getTextEp().setText(String.valueOf(resultado));
+
+
+			}catch (NumberFormatException e2) {
+				vista.exportWindows("ERROR EN LOS DATOS.\nINGRESELOS NUEVAMENTE\n(Recuerde usar puntos para cifras decimales).", "ERROR", 0);
+			}
+		}
+		if(c.equals("B_DENSIDADENERGIA")) {
+
+			try {
+
+				double e1 = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextUE().getText()) ;
+				double e2 = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextUEp().getText());
+				double eE1 = Integer.parseInt(vista.getCapacitanciaDielectrica().getTexEUE().getText());
+				double eE2 = Integer.parseInt(vista.getCapacitanciaDielectrica().getTextEUEp().getText());
+
+				double resultado = 0.5*((Math.pow(e1, 2))*Math.pow(10, eE1))*(e2*Math.pow(10, eE2));
+
+				vista.getCapacitanciaDielectrica().getTextU().setText(String.valueOf(resultado));
+
+
+			}catch (NumberFormatException e2) {
+				vista.exportWindows("ERROR EN LOS DATOS.\nINGRESELOS NUEVAMENTE\n(Recuerde usar puntos para cifras decimales).", "ERROR", 0);
+			}
+		}
+		
+		if(c.equals("B_DENSIDADECARGA")) {
+
+			try {
+
+				double d = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextDDo().getText()) ;
+				double k = Double.parseDouble(vista.getCapacitanciaDielectrica().getTextDK().getText());
+				double eD = Integer.parseInt(vista.getCapacitanciaDielectrica().getTextEDDo().getText());
+				double eK = Integer.parseInt(vista.getCapacitanciaDielectrica().getTextEDK().getText());
+
+				double resultado = (d*Math.pow(10, eD))*(1-(1/(k*Math.pow(10, eK))));
+
+				vista.getCapacitanciaDielectrica().getTextD().setText(String.valueOf(resultado));
+
+
+			}catch (NumberFormatException e2) {
+				vista.exportWindows("ERROR EN LOS DATOS.\nINGRESELOS NUEVAMENTE\n(Recuerde usar puntos para cifras decimales).", "ERROR", 0);
+			}
+		}
+		
 
 		if(c.equals("CLICK_LEYGAUSSESFERA")) {
 			if(vista.getLeyGaussEsfera().getChckbxExterna().isSelected()) {
