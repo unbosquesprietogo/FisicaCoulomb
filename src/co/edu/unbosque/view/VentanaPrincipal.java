@@ -26,6 +26,8 @@ public class VentanaPrincipal extends JFrame {
 	private Distancia distancia;
 	private Carga carga;
 	private EnergiaPotencial energiaPotencial;
+	private Campo2 campo2;
+	private CampoElectrico2 campoElectrico2; 
 	
 	public VentanaPrincipal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./Data/fisica.png"));
@@ -42,6 +44,8 @@ public class VentanaPrincipal extends JFrame {
 		leyCoulomb =new LeyCoulomb();
 		varilla= new Varilla();
 		energiaPotencial = new EnergiaPotencial();
+		campo2 = new Campo2();
+		campoElectrico2 = new CampoElectrico2();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 520, 440);
@@ -117,6 +121,15 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 		
+	}
+
+	
+	public CampoElectrico2 getCampoElectrico2() {
+		return campoElectrico2;
+	}
+
+	public Campo2 getCampo2() {
+		return campo2;
 	}
 
 	public JPanel getContentPane() {

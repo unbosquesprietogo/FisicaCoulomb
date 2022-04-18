@@ -37,19 +37,19 @@ public class Inicio extends JPanel {
 		
 		btnCargas = new JButton("Ley Coulomb");
 		btnCargas.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
-		btnCargas.setBounds(89, 293, 135, 40);
+		btnCargas.setBounds(42, 293, 135, 40);
 		btnCargas.setActionCommand("BTN_CARGAS_I");
 		add(btnCargas);
 		
 		btnCampo = new JButton("Campo Electrico");
 		btnCampo.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
-		btnCampo.setBounds(240, 293, 135, 40);
+		btnCampo.setBounds(193, 293, 135, 40);
 		btnCampo.setActionCommand("BTN_CAMPO_I");
 		add(btnCampo);
 
 		btnPotencial = new JButton("Energía Potencial");
 		btnPotencial.setFont(new Font("Franklin Gothic Demi Cond", Font.PLAIN, 13));
-		btnPotencial.setBounds(390, 293, 135, 40);
+		btnPotencial.setBounds(343, 293, 135, 40);
 		btnPotencial.setActionCommand("BTN_POTENCIAL_I");
 		add(btnPotencial);
 		

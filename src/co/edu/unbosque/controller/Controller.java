@@ -68,6 +68,15 @@ public class Controller implements ActionListener{
 		vista.getEnergiaPotencial().getChckbxEnergiaPotencialTotal().addActionListener(this);
 		vista.getEnergiaPotencial().getChckbxPotencialPunto().addActionListener(this);
 		vista.getEnergiaPotencial().getChckbxTrabajoCarga().addActionListener(this);
+		vista.getCampo2().getBtnAnadirCarga().addActionListener(this);
+		vista.getCampo2().getBtnResultado().addActionListener(this);
+		vista.getCampo2().getBtnRegresar().addActionListener(this);
+		vista.getCampo2().getChckbxCarga1().addActionListener(this);
+		vista.getCampoElectrico2().getbtnCoordenadas().addActionListener(this);
+		vista.getCampoElectrico2().getbtnDistancia().addActionListener(this);
+		vista.getCampoElectrico2().getBtnRegresar().addActionListener(this);
+		
+		
 
 	}
 	@Override
@@ -160,14 +169,36 @@ public class Controller implements ActionListener{
 		}
 		if(c.equals("BTN_CAMPOELECTRICO_CE")) {
 			vista.getCampoElectrico().setVisible(false);
+			vista.getCampoElectrico2().setVisible(true);
+			vista.setContentPane(vista.getCampoElectrico2());
+		}
+		if(c.equals("BTN_REGRESAR_C")) {
+			vista.getCampoElectrico2().setVisible(true);
+			vista.getCampo().setVisible(false);
+			vista.setContentPane(vista.getCampoElectrico2());
+			vista.limpiarPanel(vista.getCampo());
+		}
+		if(c.equals("BTN_DISTANCIA_CE2")) {
+			vista.getCampoElectrico2().setVisible(false);
 			vista.getCampo().setVisible(true);
 			vista.setContentPane(vista.getCampo());
 		}
-		if(c.equals("BTN_REGRESAR_C")) {
+		if(c.equals("BTN_COORDENADAS_CE2")) {
+			vista.getCampoElectrico2().setVisible(false);
+			vista.getCampo2().setVisible(true);
+			vista.setContentPane(vista.getCampo2());
+		}
+		if(c.equals("BTN_REGRESAR_C2")) {
+			vista.getCampoElectrico2().setVisible(true);
+			vista.getCampo2().setVisible(false);
+			vista.setContentPane(vista.getCampoElectrico2());
+			vista.limpiarPanel(vista.getCampo2());
+		}
+		
+		if(c.equals("BTN_REGRESAR_CE2")) {
 			vista.getCampoElectrico().setVisible(true);
-			vista.getCampo().setVisible(false);
+			vista.getCampoElectrico2().setVisible(false);
 			vista.setContentPane(vista.getCampoElectrico());
-			vista.limpiarPanel(vista.getCampo());
 		}
 		if(c.equals("BTN_VARILLA_CE")) {
 			vista.getCampoElectrico().setVisible(false);
@@ -238,6 +269,9 @@ public class Controller implements ActionListener{
 		}
 		if(c.equals("CHK_D_FE")) {
 			vista.getFuerzaElectrica().validarCheck(3);
+		}
+		if(c.equals("CHK_C1_CE2")) {
+			vista.getCampo2().validarCheck(1);
 		}
 		if(c.equals("BTN_RESULTADO_D")) {
 
@@ -470,6 +504,58 @@ public class Controller implements ActionListener{
 			}
 
 		}
+		
+		if(c.equals("BTN_AÑADIR_C2")) {
+			
+			try {
+				double carga1= Double.parseDouble(vista.getCampo2().getTextCarga().getText());
+				
+				double[] coordenadas2= new double[3];
+				double[] coordenadas1= new double[3];
+				coordenadas2[0] = Double.parseDouble(vista.getCampo2().getTextXP().getText());
+				coordenadas2[1] = Double.parseDouble(vista.getCampo2().getTextYP().getText());
+				coordenadas2[2] = Double.parseDouble(vista.getCampo2().getTextZP().getText());
+				coordenadas1[0] = Double.parseDouble(vista.getCampo2().getTextXC().getText());
+				coordenadas1[1] = Double.parseDouble(vista.getCampo2().getTextYC().getText());
+				coordenadas1[2] = Double.parseDouble(vista.getCampo2().getTextZC().getText());
+				int eCarga1= Integer.parseInt(vista.getCampo2().getTextExponenteC().getText());
+				
+
+				carga.setCarga1(carga1);
+				carga.setCoordenadas2(coordenadas2);
+				carga.setCoordenadas1(coordenadas1);
+				
+
+				carga.agregarCarga(eCarga1);	
+				String data="";
+				
+				
+				for (int i = 0; i < carga.getCoordenadas().size(); i++) {
+					data += "Carga "+(i+1)+"= "+carga.getCoordenadas().get(i).split(",")[0]+" x10E "+carga.getCoordenadas().get(i).split(",")[1]+"\n"+
+							"x"+(i+1)+"= "+carga.getCoordenadas().get(i).split(",")[2]+"\n"+
+							"y"+(i+1)+"= "+carga.getCoordenadas().get(i).split(",")[3]+"\n"+
+							"z"+(i+1)+"= "+carga.getCoordenadas().get(i).split(",")[4]+"\n"+"\n"
+							;
+					
+				}
+				vista.exportWindows(data, "Cargas", 1);
+			}catch(NumberFormatException e1) {
+
+				vista.exportWindows("ERROR EN LOS DATOS.\nINGRESELOS NUEVAMENTE\n(Recuerde usar puntos para cifras decimales).", "ERROR", 0);
+			}finally {
+				vista.getCampo2().getTextXP().setEnabled(false);
+				vista.getCampo2().getTextYP().setEnabled(false);
+				vista.getCampo2().getTextZP().setEnabled(false);
+				vista.getCampo2().getBtnResultado().setVisible(true);
+			}
+			
+			
+		}
+		if(c.equals("BTN_RESULTADO_C2")) {
+			
+			vista.getCampo2().getTextCampo().setText(String.valueOf(carga.calcularCampoVectorial()));
+		}
+		
 
 
 	}
